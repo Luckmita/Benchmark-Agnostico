@@ -16,6 +16,8 @@ class ArtifactStore:
         if not run_id or "/" in run_id or "\\" in run_id or run_id in {".", ".."}:
             raise ValueError("run_id must be a non-empty path-safe identifier")
         self.root = root / run_id
+        if self.root.is_symlink():
+            raise ValueError("run directory cannot be a symlink")
         for group in ARTIFACT_GROUPS:
             directory = self.root / group
             if directory.is_symlink():
