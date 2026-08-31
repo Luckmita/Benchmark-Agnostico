@@ -43,7 +43,7 @@ Cada bateria deve conter: construto operacional; hipotese preregistrada; tarefa 
 
 ## Avanco B2
 
-O contrato inicial foi implementado em `src/benchmark_core/protocol.py` com testes para agente minimo, persistencia opcional, rejeicao de implementacao incompleta e seed invalida. `AgentManifest` e `schemas/agent_manifest.schema.json` cobrem metadados, capabilities e timeout finito; `check_determinism` cobre entradas publicas repetidas. O runner B3 possui timeout real, isolamento por processo, episodios stateful, registry append-only, artefatos estruturados e CLI de hash; B2/B3 continuam abertos ate integrar limites semanticos definidos pelos ambientes e um fluxo de run completo.
+O contrato inicial foi implementado em `src/benchmark_core/protocol.py` com testes para agente minimo, persistencia opcional, rejeicao de implementacao incompleta e seed invalida. `AgentManifest` e `schemas/agent_manifest.schema.json` cobrem metadados, capabilities e timeout finito; `check_determinism` cobre entradas publicas repetidas. O runner B3 possui timeout real, isolamento por processo, episodios stateful, registry append-only, artefatos estruturados e fluxo de run ponta a ponta; B2/B3 continuam abertos ate integrar limites semanticos definidos pelos ambientes e uma CLI de execução completa.
 
 ## Skills evolutivas
 

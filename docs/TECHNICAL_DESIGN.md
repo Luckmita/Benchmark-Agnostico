@@ -35,6 +35,8 @@ O runner inicial esta em `src/benchmark_core/runner.py`: cada acao roda em proce
 
 `ArtifactStore` em `src/benchmark_core/artifacts.py` cria grupos separados por `run_id` e recusa sobrescrita por padrao. A CLI `scripts/benchmark_cli.py hash-json` aceita JSON como argumento ou stdin e produz hash canonico para uso em pipelines.
 
+`execute_run` em `src/benchmark_core/run.py` e o orquestrador ponta a ponta: grava manifest e config, executa um episodio isolado, persiste o resultado bruto e anexa o `RunRecord`. O fluxo e coberto em `tests/test_run.py`.
+
 ## Componentes
 
 - `benchmark_core`: contratos, ambientes, tarefas, metricas e validadores.

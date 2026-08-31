@@ -19,11 +19,12 @@
 - Runner B3 inicial implementado com processo isolado, timeout real, estados de erro e registry JSONL append-only com hashes.
 - Executor de episodios adicionado com estado persistente por episodio, validator de acao, timeout e rejeicao controlada de entradas nao serializaveis.
 - Artefatos estruturados e CLI de hash canonico adicionados; sobrescrita de artefato e run_id inseguro sao rejeitados por padrao.
+- Fluxo `execute_run` integrado: manifest, config, episodio, artefato bruto e registry agora sao exercitados ponta a ponta.
 - Fechamento B0/B1 aprovado e registrado em `docs/reviews/B0_B1_GATE_REVIEW_2026-08-31.md` com CHANGE-ID.
 
 ## Proximo passo executavel
 
-Aprovar o charter B0 e revisar a matriz B1 para cada capacidade: construto, hipotese, tarefa, controles, metricas, seeds, budget, analise estatistica, shortcut, leakage e criterio TEST_INVALID. Em B2/B3, integrar artefatos e CLI e decidir os limites semanticos fornecidos por cada ambiente. Ao fechar qualquer gate, executar `gate-review` e extrair skills adicionais se houver procedimento repetivel.
+Aprovar o charter B0 e revisar a matriz B1 para cada capacidade: construto, hipotese, tarefa, controles, metricas, seeds, budget, analise estatistica, shortcut, leakage e criterio TEST_INVALID. Em B2/B3, adicionar CLI de run e decidir os limites semanticos fornecidos por cada ambiente. Ao fechar qualquer gate, executar `gate-review` e extrair skills adicionais se houver procedimento repetivel.
 
 ## Bloqueios conhecidos
 
