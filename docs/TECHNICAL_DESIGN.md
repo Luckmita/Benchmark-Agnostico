@@ -37,6 +37,8 @@ O runner inicial esta em `src/benchmark_core/runner.py`: cada acao roda em proce
 
 `execute_run` em `src/benchmark_core/run.py` e o orquestrador ponta a ponta: grava manifest e config, executa um episodio isolado, persiste o resultado bruto e anexa o `RunRecord`. O fluxo e coberto em `tests/test_run.py`.
 
+A primeira tarefa publica de desenvolvimento C1 esta em `src/benchmark_core/tasks/c1_learning.py`. Ela e uma familia de bandits estacionarios configuraveis, com controles aleatorio e epsilon-greedy. A tarefa nao representa ainda o conjunto final selado e nao deve ser tratada como benchmark congelado.
+
 ## Componentes
 
 - `benchmark_core`: contratos, ambientes, tarefas, metricas e validadores.

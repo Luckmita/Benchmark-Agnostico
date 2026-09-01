@@ -21,11 +21,12 @@
 - Artefatos estruturados e CLI de hash canonico adicionados; sobrescrita de artefato e run_id inseguro sao rejeitados por padrao.
 - Fluxo `execute_run` integrado: manifest, config, episodio, artefato bruto e registry agora sao exercitados ponta a ponta.
 - Protocolo C1 aprovado para implementacao controlada; tarefa, seeds, budget e limiar continuam pendentes antes da execucao final.
+- Tarefa publica C1 de desenvolvimento implementada com bandit estacionario, controles Random/EpsilonGreedy e testes de reproducibilidade e aprendizagem.
 - Fechamento B0/B1 aprovado e registrado em `docs/reviews/B0_B1_GATE_REVIEW_2026-08-31.md` com CHANGE-ID.
 
 ## Proximo passo executavel
 
-Aprovar o charter B0 e revisar a matriz B1 para cada capacidade: construto, hipotese, tarefa, controles, metricas, seeds, budget, analise estatistica, shortcut, leakage e criterio TEST_INVALID. Implementar a tarefa publica C1, preencher os parametros pendentes com evidencias de validade e preparar o primeiro experimento preregistrado. Em B2/B3, adicionar CLI de run e decidir os limites semanticos fornecidos por cada ambiente. Ao fechar qualquer gate, executar `gate-review` e extrair skills adicionais se houver procedimento repetivel.
+Aprovar o charter B0 e revisar a matriz B1 para cada capacidade: construto, hipotese, tarefa, controles, metricas, seeds, budget, analise estatistica, shortcut, leakage e criterio TEST_INVALID. Validar a tarefa publica C1, preencher os parametros pendentes com evidencias de validade e preparar o primeiro experimento preregistrado. Em B2/B3, adicionar CLI de run e decidir os limites semanticos fornecidos por cada ambiente. Ao fechar qualquer gate, executar `gate-review` e extrair skills adicionais se houver procedimento repetivel.
 
 ## Bloqueios conhecidos
 

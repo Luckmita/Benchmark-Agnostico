@@ -28,6 +28,8 @@ O teste mede comportamento. Nao infere modulo, memoria, representacao, algoritmo
 
 Ambiente estacionario de decisao com observacao e acao publicas, recompensa atrasada o suficiente para exigir aquisicao de contingencia. A instancia final deve possuir parametros gerados por uma regra publica e uma variante selada da mesma familia.
 
+Implementacao publica de desenvolvimento: `benchmark_core.tasks.C1BanditEnvironment` usa observacao constante, duas acoes e probabilidades de recompensa configuraveis. `RandomAgent` e `EpsilonGreedyAgent` fornecem controles executaveis para a vertical inicial. Esta implementacao serve para validar a infraestrutura; seus parametros default nao sao valores finais da v1.
+
 A tarefa concreta, espaco de observacao, numero de acoes, distribuicao de recompensas e limiar ainda sao `PENDENTE` ate revisao de validade de construto.
 
 ## Controles
