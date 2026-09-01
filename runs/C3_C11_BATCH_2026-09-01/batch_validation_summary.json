@@ -1,0 +1,35 @@
+{
+  "date": "2026-09-01",
+  "capacities": {
+    "C3": {
+      "status": "PASS",
+      "baseline_mean": 52.2,
+      "agent_mean": 68.7,
+      "difference": 16.5
+    },
+    "C4": {
+      "status": "PASS",
+      "baseline_mean": 51.714285714285715,
+      "agent_mean": 76.85714285714286,
+      "difference": 25.142857142857146
+    },
+    "C5": {
+      "status": "PASS",
+      "baseline_mean": 45.1,
+      "agent_mean": 50.8,
+      "difference": 5.699999999999996
+    },
+    "C6": {
+      "status": "PASS",
+      "baseline_mean": 50.0,
+      "agent_mean": 61.3,
+      "difference": 11.299999999999997
+    },
+    "C10": {
+      "status": "PASS",
+      "baseline_mean": 31.6,
+      "agent_mean": 40.6,
+      "difference": 9.0
+    }
+  }
+}
