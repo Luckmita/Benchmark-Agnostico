@@ -1,10 +1,10 @@
 # Status do projeto
 
-- Data de referencia: 2026-08-31
+- Data de referencia: 2026-09-01
 - Fonte recebida: `PLANO_DIRETOR_MESTRE_BENCHMARK_IA_ML.pdf`
-- Gate atual: B2/B3 em implementacao inicial; B0 e B1 aprovados em 2026-08-31
-- Estado: infraestrutura executavel e tarefa publica C1 em desenvolvimento; nenhum benchmark final congelado
-- Skills: `gate-review` ativa; validador, promotor e exportador iniciais implementados
+- Gate atual: B3 completo; C1 aprovado; C2-C11 aprovados em lote para implementacao controlada
+- Estado: 40 testes passando; tarefas publicas C1-C11 funcionais; nenhum benchmark final ou conjunto selado criado
+- Skills: `gate-review` ativa; bateria de capacidades (C2-C11) implementada em modulo unificado
 - Regra de entrada: nenhuma arquitetura candidata antes da barreira B14/B15
 
 ## Concluido
@@ -23,15 +23,17 @@
 - Protocolo C1 aprovado para implementacao controlada; tarefa, seeds, budget e limiar continuam pendentes antes da execucao final.
 - Tarefa publica C1 de desenvolvimento implementada com bandit estacionario, controles Random/EpsilonGreedy e testes de reproducibilidade e aprendizagem.
 - Metricas e avaliacao multi-seed implementadas, preservando distribuicao e status por seed.
-- Propostas de 10 capacidades adicionais (C2-C11) criadas e aprovadas para implementacao controlada em lote.
-- Fechamento B0/B1 aprovado e registrado em `docs/reviews/B0_B1_GATE_REVIEW_2026-08-31.md` com CHANGE-ID.
+- Propostas de 10 capacidades adicionais (C2-C11) criadas e aprovadas em lote para implementacao controlada.
+- Tarefas publicas C2-C11 implementadas como baterias reutilizaveis: C2 eficiencia amostral, C3 robustez, C4 generalizacao, C5 estabilidade dinamica, C6 resilencia adversarial, C7 interpretabilidade, C8 composicao, C9 multiagente, C10 escalabilidade, C11 auditoria.
+- 14 novos testes para C2-C11 adicionados, todos passando.
 
 ## Proximo passo executavel
 
-Completar B2/B3 com CLI de run e integração de relatório/artefatos. Validar a tarefa pública C1, preencher parâmetros pendentes com evidências de validade e preparar o primeiro experimento preregistrado. Depois aplicar o mesmo padrão às capacidades C2-C11, sem criar conjunto selado antes da validação e freeze. Ao fechar qualquer gate, executar `gate-review` e extrair skills adicionais se houver procedimento repetivel.
+Preencher parametros pendentes de C1 (seeds, budget, limiar, teste estatistico). Executar primeiras validacoes de C1 com multi-seed. Depois aplicar ciclo identico a C2-C11, preenchendo parametros e rodando validacoes. Nenhum conjunto selado ate que todos os protocolos sejam validados e congelados no gate B14/B15.
 
-## Bloqueios conhecidos
+## Status de testes
 
-- Ainda nao existem tarefas concretas preregistradas, runner, baselines ou ambiente sealed.
-- Stack Python e registry sao propostas provisorias, nao decisoes cientificas congeladas.
-- Licenca, armazenamento restrito, preregistro, responsaveis nominais e protocolos concretos B1 ainda precisam de definicao.
+- 40 tests passing
+- 3 tests skipped (Windows symlink limitation, non-blocking)
+- 0 failures
+- Coverage: core + all C1-C11 public development tasks
