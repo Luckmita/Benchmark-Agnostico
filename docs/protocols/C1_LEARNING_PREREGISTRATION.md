@@ -1,8 +1,10 @@
 # C1 - Preregistracao de aprendizagem
 
-Status: `PROPOSED - PENDING SCIENTIFIC REVIEW`
+Status: `APPROVED FOR CONTROLLED IMPLEMENTATION - 2026-09-01`
 
 CHANGE-ID: `CHG-2026-09-01-C1-PROTOCOL-PROPOSAL`
+
+Registro de aprovacao: `docs/reviews/C1_PROTOCOL_APPROVAL_2026-09-01.md`
 
 Este documento e uma proposta de protocolo para C1. Nao e um freeze e nao autoriza conjunto selado. A tarefa deve ser aprovada pelo conselho cientifico antes da implementacao definitiva.
 
