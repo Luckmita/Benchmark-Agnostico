@@ -6,7 +6,7 @@ from .evaluation import evaluate_agent
 from .metrics import SummaryStatistics, paired_effect_size, steps_to_threshold, summarize, trapezoidal_auc, win_rate
 from .artifacts import ArtifactStore
 from .protocol import AgentCapabilities, AgentProtocolError, AgentSpecification, Transition, validate_agent
-from .registry import RunRecord, RunRegistry, hash_file, hash_json
+from .registry import RunRecord, RunRegistry, hash_file, hash_json, hash_paths, hash_source_tree
 from .runner import RunResult, record_result, run_action
 from .run import execute_run
 
@@ -25,6 +25,8 @@ __all__ = [
     "execute_run",
     "hash_file",
     "hash_json",
+    "hash_paths",
+    "hash_source_tree",
     "record_result",
     "run_action",
     "run_episode",

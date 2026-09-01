@@ -16,6 +16,7 @@ from .registry import RunRecord, RunRegistry
 class RunResult:
     status: str
     action: Any = None
+    reward: float | None = None
     elapsed_seconds: float = 0.0
     error: str = ""
 

@@ -9,6 +9,12 @@ description = "Neutral, reproducible benchmark infrastructure for AI and ML agen
 requires-python = ">=3.12"
 dependencies = []
 
+[project.scripts]
+benchmark-cli = "benchmark_core.cli:main"
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 

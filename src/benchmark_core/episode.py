@@ -5,6 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 import multiprocessing as mp
 import pickle
+import time
 from typing import Any, Callable, Protocol
 
 from .manifest import AgentManifest
@@ -80,13 +81,15 @@ def _episode_worker(
         action_results: list[RunResult] = []
         for step in range(max_steps):
             agent.observe(observation)
+            action_start = time.monotonic()
             action = agent.act()
+            action_elapsed = time.monotonic() - action_start
             if action_validator is not None:
                 action_validator(action)
             next_observation, reward, terminated, truncated, _info = environment.step(action)
             reward = float(reward)
             total_reward += reward
-            action_results.append(RunResult("PASS", action=action))
+            action_results.append(RunResult("PASS", action=action, reward=reward, elapsed_seconds=action_elapsed))
             if specification.capabilities.online_learning:
                 agent.learn(Transition(observation, action, reward, next_observation, terminated, truncated))
             observation = next_observation

@@ -27,7 +27,7 @@ Principais motivos:
 - Componentes prototipais de API, runner isolado, registry append-only, artifacts e avaliacao multi-seed.
 - Tarefa publica exploratoria C1 baseada em bandit.
 - Experimentos publicos exploratorios derivados de bandit, sem validade de freeze.
-- Suite de partida: `40 passed, 3 skipped` quando executada com `PYTHONPATH=src`; os skips cobrem symlinks indisponiveis no ambiente.
+- Suite atual: `44 passed, 3 skipped` apos `python -m pip install -e ".[dev]"`; os skips cobrem symlinks indisponiveis no ambiente.
 - Skill `gate-review` valida pelo `scripts/skill_validator.py`.
 
 Essa evidencia pode ser reaproveitada, mas deve ser revalidada contra os criterios formais de B1-B3.
@@ -54,8 +54,8 @@ A matriz detalhada esta em `docs/reviews/GATE_AUDIT_2026-09-01.md`.
 ## Trabalho corretivo em andamento
 
 1. Corrigir status, decisoes e taxonomia canonica.
-2. Tornar instalacao, testes e run publico reproduziveis.
-3. Completar contratos e evidencias B2/B3 sem alegar fechamento prematuro.
+2. Instalacao editavel, testes e run publico rastreavel implementados.
+3. Revisar os contratos e evidencias B2/B3 sem alegar fechamento prematuro.
 4. Reespecificar C1-C11 e validar uma vertical C1 antes de expandir.
 5. Registrar bloqueios externos de B12, B13 e B15 sem simular sua conclusao.
 

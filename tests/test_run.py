@@ -57,6 +57,17 @@ class RunTests(unittest.TestCase):
             self.assertEqual(status, "PASS")
             episode = json.loads((root / "artifacts" / "run-1" / "raw" / "episode_result.json").read_text())
             self.assertEqual(episode["total_reward"], 2.5)
+            self.assertEqual(episode["steps_detail"][0]["reward"], 2.5)
+            run_metadata = json.loads(
+                (root / "artifacts" / "run-1" / "manifest" / "run_metadata.json").read_text()
+            )
+            self.assertEqual(run_metadata["run_id"], "run-1")
+            self.assertEqual(len(run_metadata["benchmark_code_hash"]), 64)
+            metrics = json.loads(
+                (root / "artifacts" / "run-1" / "metrics" / "episode_metrics.json").read_text()
+            )
+            self.assertEqual(metrics["total_reward"], 2.5)
+            self.assertTrue((root / "artifacts" / "run-1" / "logs" / "execution.json").exists())
             self.assertEqual(len(registry_path.read_text(encoding="utf-8").splitlines()), 1)
 
 

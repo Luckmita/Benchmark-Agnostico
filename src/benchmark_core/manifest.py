@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import asdict, dataclass, field
 from math import isfinite
+import re
 from typing import Any, Callable
 
 from .protocol import AgentCapabilities, AgentProtocol, AgentProtocolError, AgentSpecification, validate_agent
@@ -20,6 +21,11 @@ class AgentManifest:
     entrypoint: str = ""
     dependencies: tuple[str, ...] = ()
     declared_timeout_seconds: float = 1.0
+    runtime: str = "python"
+    training_provenance: str = "not-declared"
+    model_hash: str = "not-applicable"
+    adapter_hash: str = "not-applicable"
+    hardware_requirements: str = "unspecified"
 
     def validate(self) -> None:
         if not self.manifest_version.strip():
@@ -32,6 +38,15 @@ class AgentManifest:
             raise AgentProtocolError("declared_timeout_seconds must be positive")
         if not isinstance(self.capabilities, AgentCapabilities):
             raise AgentProtocolError("capabilities must be AgentCapabilities")
+        if not self.runtime.strip():
+            raise AgentProtocolError("runtime is required")
+        if not self.training_provenance.strip():
+            raise AgentProtocolError("training_provenance is required")
+        if not self.hardware_requirements.strip():
+            raise AgentProtocolError("hardware_requirements is required")
+        for field_name, value in (("model_hash", self.model_hash), ("adapter_hash", self.adapter_hash)):
+            if value not in {"not-applicable", "not-provided"} and re.fullmatch(r"sha256:[0-9a-f]{64}", value) is None:
+                raise AgentProtocolError(f"{field_name} must be a sha256 digest or an explicit sentinel")
 
     def to_dict(self) -> dict[str, Any]:
         self.validate()

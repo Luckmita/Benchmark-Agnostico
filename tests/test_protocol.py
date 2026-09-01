@@ -79,6 +79,11 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(AgentProtocolError, "timeout"):
             manifest.validate()
 
+    def test_manifest_rejects_untraceable_hash_format(self) -> None:
+        manifest = AgentManifest("1", "baseline", "0.1", model_hash="abc123")
+        with self.assertRaisesRegex(AgentProtocolError, "model_hash"):
+            manifest.validate()
+
     def test_determinism_check_accepts_same_seed_and_observation(self) -> None:
         check_determinism(MinimalAgent, self.specification, {"value": 1})
 

@@ -11,6 +11,7 @@ from benchmark_core import (
     RunRegistry,
     RunRecord,
     hash_json,
+    hash_paths,
     run_action,
 )
 
@@ -89,6 +90,15 @@ class RunnerTests(unittest.TestCase):
             ))
             self.assertEqual(len(path.read_text(encoding="utf-8").splitlines()), 2)
             self.assertTrue(path.parent.exists())
+
+    def test_hash_paths_includes_relative_names_and_contents(self) -> None:
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            left = root / "left.txt"
+            right = root / "right.txt"
+            left.write_text("same", encoding="utf-8")
+            right.write_text("same", encoding="utf-8")
+            self.assertNotEqual(hash_paths([left], base=root), hash_paths([right], base=root))
 
 
 if __name__ == "__main__":

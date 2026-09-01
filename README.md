@@ -36,3 +36,21 @@ Em caso de conflito, a ordem e: plano diretor aprovado, decisoes registradas em 
 ## Skills
 
 Ao fechar cada gate, use `.github/skills/gate-review/SKILL.md` para verificar evidencias e procurar procedimentos reutilizaveis. Valide com `python scripts/skill_validator.py`; promova com `python scripts/skill_promote.py <nome>` e exporte para outras IAs com `python scripts/skill_export.py`.
+
+## Ambiente de desenvolvimento
+
+Requer Python 3.12 ou superior. Em um ambiente virtual:
+
+```powershell
+python -m pip install -e ".[dev]"
+python -m pytest -q
+python scripts/skill_validator.py
+```
+
+Um run publico de desenvolvimento C1 pode ser produzido sem dados selados:
+
+```powershell
+python -m benchmark_core.cli run-public-c1 --output-root artifacts/public-demo --run-id demo-c1-seed-42 --seed 42
+```
+
+O comando cria `registry.jsonl` e os grupos `raw/`, `derived/`, `logs/`, `metrics/` e `manifest/` sob o `run_id`. Esses dados sao somente evidencia de infraestrutura/desenvolvimento; nao constituem benchmark congelado.

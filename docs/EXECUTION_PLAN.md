@@ -41,9 +41,11 @@ Cada bateria deve conter: construto operacional; hipotese preregistrada; tarefa 
 5. Uma bateria vertical completa, preferencialmente C1, incluindo baseline e validacao.
 6. Processo de release com sanitizer e freeze.
 
-## Avanco B2
+## Avanco prototipal B2/B3
 
-O contrato inicial foi implementado em `src/benchmark_core/protocol.py` com testes para agente minimo, persistencia opcional, rejeicao de implementacao incompleta e seed invalida. `AgentManifest` e `schemas/agent_manifest.schema.json` cobrem metadados, capabilities e timeout finito; `check_determinism` cobre entradas publicas repetidas. O runner B3 possui timeout real, isolamento por processo, episodios stateful, registry append-only, artefatos estruturados e fluxo de run ponta a ponta; B2/B3 continuam abertos ate integrar limites semanticos definidos pelos ambientes e uma CLI de execução completa.
+O contrato inicial foi implementado em `src/benchmark_core/protocol.py` com testes para agente minimo, persistencia opcional, rejeicao de implementacao incompleta e seed invalida. `AgentManifest` e `schemas/agent_manifest.schema.json` cobrem metadados, capabilities, runtime, proveniencia declarada, hashes e timeout finito; `check_determinism` cobre entradas publicas repetidas. O runner B3 possui timeout real, isolamento por processo, episodios stateful, registry append-only, artefatos estruturados e fluxo de run ponta a ponta. A CLI publica cria um run C1 de desenvolvimento rastreavel sem `PYTHONPATH` manual depois da instalacao editavel.
+
+B2/B3 permanecem `PARTIAL`: fechamento depende da aprovacao linear de B1, revisao do contrato universal, politica de dependencias/containers e evidencia de reproducao por outro executor.
 
 O avaliador multi-seed em `src/benchmark_core/evaluation.py` e as metricas em `src/benchmark_core/metrics.py` formam a primeira camada de análise. O próximo trabalho deve gerar relatório por run sem perder retornos individuais, antes de ampliar a cobertura de capacidades C2-C11.
 
