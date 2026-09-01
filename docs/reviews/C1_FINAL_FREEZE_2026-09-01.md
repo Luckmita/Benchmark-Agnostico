@@ -1,4 +1,6 @@
-# C1 - Aprovação final e freeze de parâmetros
+# HISTORICO SUPERADO - C1 - Aprovação final e freeze de parâmetros
+
+> Superado como decisao vigente pelo `CHG-2026-09-01-GATE-REALIGNMENT`. Os resultados permanecem evidencia exploratoria; nao autorizam B13-B16.
 
 Data: 2026-09-01
 Status: `APPROVED - READY FOR SEALING`

@@ -1,4 +1,6 @@
-# C9 - Coordenação multiagente
+# HISTORICO SUPERADO - C9 - Coordenação multiagente
+
+> Este prototipo usou uma taxonomia incorreta. C9 canonico e Transferencia multidominio. Consulte `C9_MULTIDOMAIN_TRANSFER_PREREGISTRATION.md`. Preservado somente para rastreabilidade pelo `CHG-2026-09-01-GATE-REALIGNMENT`.
 
 Status: `PROPOSED - PENDING SCIENTIFIC REVIEW`
 

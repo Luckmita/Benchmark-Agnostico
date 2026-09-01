@@ -1,4 +1,6 @@
-# C5 - Estabilidade dinâmica
+# HISTORICO SUPERADO - C5 - Estabilidade dinâmica
+
+> Este prototipo usou uma taxonomia incorreta. C5 canonico e Dependencia temporal. Consulte `C5_TEMPORAL_DEPENDENCY_PREREGISTRATION.md`. Preservado somente para rastreabilidade pelo `CHG-2026-09-01-GATE-REALIGNMENT`.
 
 Status: `PROPOSED - PENDING SCIENTIFIC REVIEW`
 

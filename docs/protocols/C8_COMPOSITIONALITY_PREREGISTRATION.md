@@ -1,4 +1,6 @@
-# C8 - Composição
+# HISTORICO SUPERADO - C8 - Composição
+
+> Este prototipo usou uma taxonomia incorreta. C8 canonico e Robustez. Consulte `C8_ROBUSTNESS_PREREGISTRATION.md`. Preservado somente para rastreabilidade pelo `CHG-2026-09-01-GATE-REALIGNMENT`.
 
 Status: `PROPOSED - PENDING SCIENTIFIC REVIEW`
 

@@ -1,4 +1,6 @@
-# C6 - Resilência adversarial
+# HISTORICO SUPERADO - C6 - Resilência adversarial
+
+> Este prototipo usou uma taxonomia incorreta. C6 canonico e Planejamento. Consulte `C6_PLANNING_PREREGISTRATION.md`. Preservado somente para rastreabilidade pelo `CHG-2026-09-01-GATE-REALIGNMENT`.
 
 Status: `PROPOSED - PENDING SCIENTIFIC REVIEW`
 

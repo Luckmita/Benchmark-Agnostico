@@ -1,4 +1,6 @@
-# C4 - Generalização
+# HISTORICO SUPERADO - C4 - Generalização
+
+> Este prototipo usou uma taxonomia incorreta. C4 canonico e Adaptacao a mudancas. Consulte `C4_ADAPTATION_PREREGISTRATION.md`. Preservado somente para rastreabilidade pelo `CHG-2026-09-01-GATE-REALIGNMENT`.
 
 Status: `PROPOSED - PENDING SCIENTIFIC REVIEW`
 

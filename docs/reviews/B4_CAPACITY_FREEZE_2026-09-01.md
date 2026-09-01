@@ -1,4 +1,6 @@
-# Gate B4: Capacidades validadas - Aprovação final
+# HISTORICO SUPERADO - Gate B4: Capacidades validadas - Aprovação final
+
+> Superado como decisao vigente pelo `CHG-2026-09-01-GATE-REALIGNMENT`. B4 normativo trata baselines; esta revisao misturou templates de capacidades com fechamento de gate.
 
 Data: 2026-09-01
 Status: `ALL CAPACITIES VALIDATED AND READY FOR SEALING`

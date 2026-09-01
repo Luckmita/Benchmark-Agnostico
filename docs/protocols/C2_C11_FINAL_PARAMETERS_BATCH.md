@@ -1,4 +1,6 @@
-# C2-C11 - Parâmetros finais aprovados (lote)
+# HISTORICO SUPERADO - C2-C11 - Parâmetros finais aprovados (lote)
+
+> Este lote foi invalidado como fonte de parametros finais pelo `CHG-2026-09-01-GATE-REALIGNMENT`: ele usa taxonomia divergente e mistura propostas, templates e resultados exploratorios. Preservado somente para rastreabilidade.
 
 Data: 2026-09-01
 Status: `APPROVED FOR CONTROLLED IMPLEMENTATION`

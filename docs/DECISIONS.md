@@ -15,6 +15,8 @@
 | D-009 | Aprovar B0 e B1 como charter de governanca e estrutura metodologica inicial | habilita a implementacao controlada de B2 sem liberar submissions | adotada em 2026-08-31 |
 | D-010 | C1 sera a primeira bateria vertical e sera preregistrada antes da implementacao da tarefa | reduz risco cientifico antes da expansao do benchmark | proposta em 2026-09-01 |
 | D-011 | Aprovar a proposta C1 para implementacao controlada, mantendo parametros pendentes fora do freeze | permite construir a primeira vertical sem fingir que o protocolo final esta congelado | adotada em 2026-09-01 |
+| D-012 | Reabrir B1 e classificar os freezes de 2026-09-01 como historicos, sem efeito de liberacao | a evidencia nao satisfaz a ordem B1-B15, a taxonomia normativa ou os criterios de validade | adotada em 2026-09-01 |
+| D-013 | Reservar B14 para release candidate, B15 para replicacao independente e B16 para submissao | restaura a semantica normativa dos gates e impede entrada prematura de candidatos | adotada em 2026-09-01 |
 
 ## Pendencias que bloqueiam freeze
 
@@ -41,3 +43,13 @@ Toda alteracao relevante deve adicionar uma entrada com `CHANGE-ID`, motivacao, 
 - Compatibilidade: nenhuma submissao ou conjunto selado foi alterado.
 - Risco de vies: protocolos, seeds, budgets e limiares continuam pendentes de definicao.
 - Resultado esperado: implementacao tecnica prossegue sob o escopo aprovado.
+
+### CHG-2026-09-01-GATE-REALIGNMENT
+
+- Motivacao: auditoria de transicao encontrou conflito entre o plano diretor, o status ativo, a taxonomia C1-C11 e os documentos de freeze.
+- Impacto cientifico: B1 e reaberto; os resultados C1-C11 existentes passam a ser evidencia exploratoria publica, sem validade de conjunto selado ou release candidate.
+- Testes afetados: contratos de taxonomia, protocolos, baterias publicas, rastreabilidade de runs e auditoria documental de gates.
+- Compatibilidade: artefatos e documentos historicos sao preservados; seus claims de gate deixam de ser vigentes. Nenhum resultado de candidato existe ou e alterado.
+- Risco de vies: baixo e redutor; a mudanca ocorre antes de qualquer submissao e remove claims nao sustentados.
+- Resultado esperado: IDs C1-C11 voltam a representar os construtos normativos e cada gate passa a depender de evidencia reproduzivel.
+- Evidencia: `docs/CORRECTIVE_REVIEW_PLAN.md` e `docs/reviews/GATE_AUDIT_2026-09-01.md`.

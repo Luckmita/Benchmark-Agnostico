@@ -1,4 +1,6 @@
-# C7 - Interpretabilidade
+# HISTORICO SUPERADO - C7 - Interpretabilidade
+
+> Este prototipo usou uma taxonomia incorreta. C7 canonico e Continual learning. Consulte `C7_CONTINUAL_LEARNING_PREREGISTRATION.md`. Preservado somente para rastreabilidade pelo `CHG-2026-09-01-GATE-REALIGNMENT`.
 
 Status: `PROPOSED - PENDING SCIENTIFIC REVIEW`
 

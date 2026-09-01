@@ -23,7 +23,11 @@ O benchmark deve ser construido, validado e congelado antes da entrada de qualqu
 
 ## Estado atual
 
-Somente o plano diretor foi recebido. O projeto esta em B0, com a documentacao operacional em elaboracao. Nenhum codigo de benchmark ou adapter de candidato deve ser iniciado antes da aprovacao do charter.
+O charter B0 foi aprovado. Uma revisao corretiva reabriu B1 porque a matriz de construtos ainda possui campos bloqueadores e prototipos posteriores divergiram da taxonomia normativa C1-C11. Existem componentes experimentais de B2/B3 e tarefas publicas de desenvolvimento, mas nenhum gate B1-B15 esta atualmente aprovado como concluido.
+
+Os registros de freeze de 2026-09-01 sao preservados como historico, porem nao autorizam conjunto selado, release candidate, replicacao ou submissao. O plano e a auditoria vigentes estao em [Plano de revisao corretiva](docs/CORRECTIVE_REVIEW_PLAN.md) e [Auditoria de gates](docs/reviews/GATE_AUDIT_2026-09-01.md).
+
+Nenhuma arquitetura candidata pode entrar antes de B14 e B15 concluidos. A primeira submissao pertence a B16.
 
 ## Fonte de verdade
 

@@ -1,4 +1,6 @@
-# C10 - Eficiência computacional
+# HISTORICO SUPERADO - C10 - Eficiência computacional
+
+> Este prototipo usou uma taxonomia incorreta. C10 canonico e Incerteza. Consulte `C10_UNCERTAINTY_PREREGISTRATION.md`. Preservado somente para rastreabilidade pelo `CHG-2026-09-01-GATE-REALIGNMENT`.
 
 Status: `PROPOSED - PENDING SCIENTIFIC REVIEW`
 

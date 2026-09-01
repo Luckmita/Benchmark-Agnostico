@@ -1,4 +1,6 @@
-# Aprovação final de C1-C11 para congelamento
+# HISTORICO SUPERADO - Aprovação final de C1-C11 para congelamento
+
+> Superado como decisao vigente pelo `CHG-2026-09-01-GATE-REALIGNMENT`. O proprio documento registra capacidades apenas `READY`; a taxonomia e as evidencias nao satisfazem B1-B15.
 
 Data: 2026-09-01
 Status: `ALL CAPACITIES VALIDATED - READY FOR SEALING`

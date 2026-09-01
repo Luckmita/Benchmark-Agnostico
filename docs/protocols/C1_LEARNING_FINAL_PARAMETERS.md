@@ -1,4 +1,6 @@
-# C1 - Parâmetros finais aprovados
+# HISTORICO SUPERADO - C1 - Parâmetros finais aprovados
+
+> Superado como freeze pelo `CHG-2026-09-01-GATE-REALIGNMENT`. O mesmo lote publico foi usado para desenvolvimento e justificativa; os valores permanecem apenas evidencia exploratoria.
 
 Data: 2026-09-01
 Status: `FROZEN FOR EXECUTION`

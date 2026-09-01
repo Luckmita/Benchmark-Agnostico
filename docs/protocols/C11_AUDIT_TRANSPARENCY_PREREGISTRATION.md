@@ -1,4 +1,6 @@
-# C11 - Auditoria e transparência
+# HISTORICO SUPERADO - C11 - Auditoria e transparência
+
+> Este prototipo usou uma taxonomia incorreta. C11 canonico e Eficiencia computacional. Consulte `C11_COMPUTATIONAL_EFFICIENCY_PREREGISTRATION.md`. Preservado somente para rastreabilidade pelo `CHG-2026-09-01-GATE-REALIGNMENT`.
 
 Status: `PROPOSED - PENDING SCIENTIFIC REVIEW`
 

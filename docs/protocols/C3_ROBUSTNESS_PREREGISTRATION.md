@@ -1,4 +1,6 @@
-# C3 - Robustez a variações
+# HISTORICO SUPERADO - C3 - Robustez a variações
+
+> Este prototipo usou uma taxonomia incorreta. C3 canonico e Generalizacao. Consulte `C3_GENERALIZATION_PREREGISTRATION.md`. Preservado somente para rastreabilidade pelo `CHG-2026-09-01-GATE-REALIGNMENT`.
 
 Status: `PROPOSED - PENDING SCIENTIFIC REVIEW`
 
