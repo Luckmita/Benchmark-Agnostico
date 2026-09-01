@@ -15,6 +15,8 @@ class ArtifactStore:
     def __init__(self, root: Path, run_id: str) -> None:
         if not run_id or "/" in run_id or "\\" in run_id or run_id in {".", ".."}:
             raise ValueError("run_id must be a non-empty path-safe identifier")
+        if root.is_symlink():
+            raise ValueError("artifact root cannot be a symlink")
         self.root = root / run_id
         if self.root.is_symlink():
             raise ValueError("run directory cannot be a symlink")

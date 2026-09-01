@@ -52,6 +52,18 @@ class ArtifactTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 ArtifactStore(root, "run-1")
 
+    def test_symlinked_artifact_root_is_rejected(self) -> None:
+        with TemporaryDirectory() as directory:
+            base = Path(directory)
+            (base / "outside").mkdir()
+            root = base / "artifacts"
+            try:
+                root.symlink_to(base / "outside", target_is_directory=True)
+            except (OSError, NotImplementedError):
+                self.skipTest("symlinks unavailable in this environment")
+            with self.assertRaises(ValueError):
+                ArtifactStore(root, "run-1")
+
 
 if __name__ == "__main__":
     unittest.main()
