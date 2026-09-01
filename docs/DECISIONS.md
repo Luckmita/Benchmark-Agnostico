@@ -13,6 +13,7 @@
 | D-007 | Promocao automatica condicionada a validador, evidencia, catalogo e CHANGE-ID quando aplicavel | reduz conhecimento informal sem liberar mudanca cientifica | adotada |
 | D-008 | Exportacao para perfil local e IAs externas e derivada e opt-in | preserva uma fonte canonica e evita sobrescrita local | adotada |
 | D-009 | Aprovar B0 e B1 como charter de governanca e estrutura metodologica inicial | habilita a implementacao controlada de B2 sem liberar submissions | adotada em 2026-08-31 |
+| D-010 | C1 sera a primeira bateria vertical e sera preregistrada antes da implementacao da tarefa | reduz risco cientifico antes da expansao do benchmark | proposta em 2026-09-01 |
 
 ## Pendencias que bloqueiam freeze
 

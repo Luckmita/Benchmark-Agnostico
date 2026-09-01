@@ -11,6 +11,7 @@ O benchmark deve ser construido, validado e congelado antes da entrada de qualqu
 - [Plano de execucao](docs/EXECUTION_PLAN.md): gates, entregaveis, criterios de saida e ordem de trabalho.
 - [Charter B0](docs/CHARTER_B0.md): missao, escopo, papeis e criterios de governanca.
 - [Matriz B1](docs/CONSTRUCT_MATRIX_B1.md): construtos, hipoteses, controles e pendencias cientificas.
+- [Preregistracao C1](docs/protocols/C1_LEARNING_PREREGISTRATION.md): proposta da primeira bateria de aprendizagem.
 - [Revisao B0/B1](docs/reviews/B0_B1_GATE_REVIEW_2026-08-31.md): registro de aprovacao e evidencias.
 - [Desenho tecnico](docs/TECHNICAL_DESIGN.md): API, componentes, dados, reproducibilidade e stack proposta.
 - [Politica Git](docs/GIT_POLICY.md): organizacao de pastas, commits, branches, pull/push e revisao.
