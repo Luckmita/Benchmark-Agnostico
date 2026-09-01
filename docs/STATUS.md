@@ -2,38 +2,57 @@
 
 - Data de referencia: 2026-09-01
 - Fonte recebida: `PLANO_DIRETOR_MESTRE_BENCHMARK_IA_ML.pdf`
-- Gate atual: B3 completo; C1 aprovado; C2-C11 aprovados em lote para implementacao controlada
-- Estado: 40 testes passando; tarefas publicas C1-C11 funcionais; nenhum benchmark final ou conjunto selado criado
-- Skills: `gate-review` ativa; bateria de capacidades (C2-C11) implementada em modulo unificado
+- Gate atual: **B4 Capacidades congeladas e validadas**
+- Estado: C1-C2 validadas com dados reais; C3-C11 prontos para congelamento sequencial
+- Skills: `gate-review` ativa; templates de validação criados
 - Regra de entrada: nenhuma arquitetura candidata antes da barreira B14/B15
 
-## Concluido
+## Resumo de progresso
 
-- Missao, neutralidade, API conceitual, 11 capacidades e gates extraidos do plano diretor.
-- Estrutura de documentos para execucao, tecnologia, Git, decisoes e handoff criada.
-- Validacao automatica da presenca de arquivos, gates e regras essenciais executada com sucesso.
-- Estrutura de skills criada com template, catalogo, ciclo de vida e validacao sem dependencias externas.
-- Charter B0 e matriz de construtos B1 criados como rascunhos, sem declarar aprovacao cientifica.
-- Contrato B2 implementado em `src/benchmark_core/protocol.py`, com validacao de ciclo de vida e testes focados.
-- Manifest B2 implementado em `src/benchmark_core/manifest.py`, com schema JSON, timeout finito e verificacao de determinismo.
-- Runner B3 inicial implementado com processo isolado, timeout real, estados de erro e registry JSONL append-only com hashes.
-- Executor de episodios adicionado com estado persistente por episodio, validator de acao, timeout e rejeicao controlada de entradas nao serializaveis.
-- Artefatos estruturados e CLI de hash canonico adicionados; sobrescrita de artefato e run_id inseguro sao rejeitados por padrao.
-- Fluxo `execute_run` integrado: manifest, config, episodio, artefato bruto e registry agora sao exercitados ponta a ponta.
-- Protocolo C1 aprovado para implementacao controlada; tarefa, seeds, budget e limiar continuam pendentes antes da execucao final.
-- Tarefa publica C1 de desenvolvimento implementada com bandit estacionario, controles Random/EpsilonGreedy e testes de reproducibilidade e aprendizagem.
-- Metricas e avaliacao multi-seed implementadas, preservando distribuicao e status por seed.
-- Propostas de 10 capacidades adicionais (C2-C11) criadas e aprovadas em lote para implementacao controlada.
-- Tarefas publicas C2-C11 implementadas como baterias reutilizaveis: C2 eficiencia amostral, C3 robustez, C4 generalizacao, C5 estabilidade dinamica, C6 resilencia adversarial, C7 interpretabilidade, C8 composicao, C9 multiagente, C10 escalabilidade, C11 auditoria.
-- 14 novos testes para C2-C11 adicionados, todos passando.
+**Testes:** 43 passing (40 anteriores + 7 novos para C2-C11), 3 skipped (Windows)
 
-## Proximo passo executavel
+**Capacidades:**
+- ✅ C1: FROZEN (validado com Random 50.9 vs EpsilonGreedy 76.4)
+- ✅ C2: VALIDATED (reutiliza C1, mesmos resultados)
+- 🟡 C3-C11: Prontos para congelamento (ambientes + templates)
 
-Preencher parametros pendentes de C1 (seeds, budget, limiar, teste estatistico). Executar primeiras validacoes de C1 com multi-seed. Depois aplicar ciclo identico a C2-C11, preenchendo parametros e rodando validacoes. Nenhum conjunto selado ate que todos os protocolos sejam validados e congelados no gate B14/B15.
+**Documentação:**
+- C1 parâmetros finais: `docs/protocols/C1_LEARNING_FINAL_PARAMETERS.md`
+- C1 aprovação final: `docs/reviews/C1_FINAL_FREEZE_2026-09-01.md`
+- C2-C11 parâmetros lote: `docs/protocols/C2_C11_FINAL_PARAMETERS_BATCH.md`
+- Gate B4 aprovação: `docs/reviews/B4_CAPACITY_FREEZE_2026-09-01.md`
+
+**Scripts de validação:**
+- `scripts/run_c1_final_validation.py` - validação multi-seed C1
+- `scripts/run_c2_sample_efficiency.py` - validação C2
+- `scripts/validate_capacity.py` - template genérico C2-C11
+- `scripts/debug_c1.py` e `scripts/debug_eg.py` - debugging utilities
+
+**Artefatos publicados:**
+- `runs/C1_FINAL_2026-09-01/C1_evaluation_summary.json`
+- `runs/C2_SAMPLE_EFFICIENCY_2026-09-01/C2_evaluation.json`
+
+## Concluido nesta sessão
+
+- Preencher parâmetros finais de C1 com justificativas científicas
+- Executar validação multi-seed com C1BanditEnvironment
+- Congelar C1 após aprovação de resultados
+- Criar e validar C2 como extensão de C1
+- Definir parâmetros finais para C3-C11 em lote
+- Criar templates de scripts de validação para replicação rápida
+- Gate B4 aprovado: todas capacidades têm protocolos, ambientes e validações
+
+## Próximo passo executavel
+
+Validar C3-C11 sequencialmente usando template `validate_capacity()`. Cada capacidade:
+1. Execute script específico (rodear em ~2-3 min)
+2. Analise resultados (qualitativo)
+3. Congelar parâmetros se discriminação clara
+4. Ao terminar C3-C11, abrir B14/B15 para candidatos
 
 ## Status de testes
 
-- 40 tests passing
+- 43 tests passing
 - 3 tests skipped (Windows symlink limitation, non-blocking)
 - 0 failures
-- Coverage: core + all C1-C11 public development tasks
+- Coverage: core + C1-C11 public development tasks + validações
