@@ -45,6 +45,8 @@ Cada bateria deve conter: construto operacional; hipotese preregistrada; tarefa 
 
 O contrato inicial foi implementado em `src/benchmark_core/protocol.py` com testes para agente minimo, persistencia opcional, rejeicao de implementacao incompleta e seed invalida. `AgentManifest` e `schemas/agent_manifest.schema.json` cobrem metadados, capabilities e timeout finito; `check_determinism` cobre entradas publicas repetidas. O runner B3 possui timeout real, isolamento por processo, episodios stateful, registry append-only, artefatos estruturados e fluxo de run ponta a ponta; B2/B3 continuam abertos ate integrar limites semanticos definidos pelos ambientes e uma CLI de execução completa.
 
+O avaliador multi-seed em `src/benchmark_core/evaluation.py` e as metricas em `src/benchmark_core/metrics.py` formam a primeira camada de análise. O próximo trabalho deve gerar relatório por run sem perder retornos individuais, antes de ampliar a cobertura de capacidades C2-C11.
+
 ## Skills evolutivas
 
 O fechamento de cada gate deve executar `gate-review`. O agente revisa testes, decisoes, incidentes, auditorias e comandos; quando encontrar um procedimento repetivel, cria uma skill em `.github/skills/<nome>/SKILL.md`, valida com `scripts/skill_validator.py` e registra a evidencia em `docs/SKILLS_CATALOG.md`. Skills ativas podem ser exportadas para outras IAs, mas nao substituem governanca nem aprovacao cientifica.

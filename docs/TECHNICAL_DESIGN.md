@@ -39,6 +39,8 @@ O runner inicial esta em `src/benchmark_core/runner.py`: cada acao roda em proce
 
 A primeira tarefa publica de desenvolvimento C1 esta em `src/benchmark_core/tasks/c1_learning.py`. Ela e uma familia de bandits estacionarios configuraveis, com controles aleatorio e epsilon-greedy. A tarefa nao representa ainda o conjunto final selado e nao deve ser tratada como benchmark congelado.
 
+`src/benchmark_core/metrics.py` fornece resumo descritivo, IC95 aproximado, efeito pareado, win rate, AUC e passos ate limiar. `src/benchmark_core/evaluation.py` executa um agente por seeds explicitas e retorna a distribuicao completa, status por seed e resumo estatistico. Nenhum resultado derivado substitui os artefatos brutos de cada run.
+
 ## Componentes
 
 - `benchmark_core`: contratos, ambientes, tarefas, metricas e validadores.

@@ -2,8 +2,8 @@
 
 - Data de referencia: 2026-08-31
 - Fonte recebida: `PLANO_DIRETOR_MESTRE_BENCHMARK_IA_ML.pdf`
-- Gate atual: B2 em implementacao inicial; B0 e B1 aprovados em 2026-08-31
-- Estado: plano operacional inicial criado; nenhum codigo de avaliacao implementado
+- Gate atual: B2/B3 em implementacao inicial; B0 e B1 aprovados em 2026-08-31
+- Estado: infraestrutura executavel e tarefa publica C1 em desenvolvimento; nenhum benchmark final congelado
 - Skills: `gate-review` ativa; validador, promotor e exportador iniciais implementados
 - Regra de entrada: nenhuma arquitetura candidata antes da barreira B14/B15
 
@@ -22,11 +22,12 @@
 - Fluxo `execute_run` integrado: manifest, config, episodio, artefato bruto e registry agora sao exercitados ponta a ponta.
 - Protocolo C1 aprovado para implementacao controlada; tarefa, seeds, budget e limiar continuam pendentes antes da execucao final.
 - Tarefa publica C1 de desenvolvimento implementada com bandit estacionario, controles Random/EpsilonGreedy e testes de reproducibilidade e aprendizagem.
+- Metricas e avaliacao multi-seed implementadas, preservando distribuicao e status por seed.
 - Fechamento B0/B1 aprovado e registrado em `docs/reviews/B0_B1_GATE_REVIEW_2026-08-31.md` com CHANGE-ID.
 
 ## Proximo passo executavel
 
-Aprovar o charter B0 e revisar a matriz B1 para cada capacidade: construto, hipotese, tarefa, controles, metricas, seeds, budget, analise estatistica, shortcut, leakage e criterio TEST_INVALID. Validar a tarefa publica C1, preencher os parametros pendentes com evidencias de validade e preparar o primeiro experimento preregistrado. Em B2/B3, adicionar CLI de run e decidir os limites semanticos fornecidos por cada ambiente. Ao fechar qualquer gate, executar `gate-review` e extrair skills adicionais se houver procedimento repetivel.
+Completar B2/B3 com CLI de run e integração de relatório/artefatos. Validar a tarefa pública C1, preencher parâmetros pendentes com evidências de validade e preparar o primeiro experimento preregistrado. Depois aplicar o mesmo padrão às capacidades C2-C11, sem criar conjunto selado antes da validação e freeze. Ao fechar qualquer gate, executar `gate-review` e extrair skills adicionais se houver procedimento repetivel.
 
 ## Bloqueios conhecidos
 
