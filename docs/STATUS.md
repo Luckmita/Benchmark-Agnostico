@@ -23,6 +23,7 @@
 - Protocolo C1 aprovado para implementacao controlada; tarefa, seeds, budget e limiar continuam pendentes antes da execucao final.
 - Tarefa publica C1 de desenvolvimento implementada com bandit estacionario, controles Random/EpsilonGreedy e testes de reproducibilidade e aprendizagem.
 - Metricas e avaliacao multi-seed implementadas, preservando distribuicao e status por seed.
+- Propostas de 10 capacidades adicionais (C2-C11) criadas e aprovadas para implementacao controlada em lote.
 - Fechamento B0/B1 aprovado e registrado em `docs/reviews/B0_B1_GATE_REVIEW_2026-08-31.md` com CHANGE-ID.
 
 ## Proximo passo executavel
