@@ -43,6 +43,10 @@ A primeira tarefa publica de desenvolvimento C1 esta em `src/benchmark_core/task
 
 `src/benchmark_core/metrics.py` fornece resumo descritivo, IC95 aproximado, efeito pareado, win rate, AUC e passos ate limiar. `src/benchmark_core/evaluation.py` executa um agente por seeds explicitas e retorna a distribuicao completa, status por seed e resumo estatistico. Nenhum resultado derivado substitui os artefatos brutos de cada run.
 
+Os prototipos publicos em `src/benchmark_core/tasks/c_batteries.py` seguem a taxonomia normativa: C2 checkpoints de eficiencia amostral, C3 particoes de generalizacao, C4 drift, C5 delayed cue, C6 retorno atrasado, C7 matriz de continual learning, C8 wrapper de perturbacao e C9 contrato multidominio. C10 possui metricas probabilisticas em `metrics.py`; C11 possui instrumentacao local limitada em `resources.py`. Esses componentes sao testes de contrato e desenvolvimento, nao baterias validadas.
+
+Os scripts historicos que declaravam freeze ou `PASS` generico falham de forma fechada. O historico executavel permanece recuperavel pelo Git, mas nao pode sobrescrever artefatos nem produzir novos claims invalidos.
+
 ## Componentes
 
 - `benchmark_core`: contratos, ambientes, tarefas, metricas e validadores.

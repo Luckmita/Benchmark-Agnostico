@@ -48,4 +48,4 @@ Se uma skill for criada ou alterada, registrar tambem gatilho, gate de origem, e
 
 ## Primeiro trabalho recomendado
 
-Revisar e aprovar o charter B0; depois completar a matriz B1 com construtos, hipoteses, controles, metricas, budgets, seeds e criterios de invalidacao. Depois implementar uma vertical C1 completa antes de expandir o framework.
+Revisar cientificamente a matriz B1 corrigida e os protocolos canonicos em `docs/protocols/README.md`. Registrar responsavel, decisao e CHANGE-ID; depois validar uma vertical C1 completa antes de expandir o framework. Nao tratar os experimentos historicos de 2026-09-01 como freeze.

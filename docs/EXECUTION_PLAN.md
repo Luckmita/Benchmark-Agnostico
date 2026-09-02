@@ -47,7 +47,7 @@ O contrato inicial foi implementado em `src/benchmark_core/protocol.py` com test
 
 B2/B3 permanecem `PARTIAL`: fechamento depende da aprovacao linear de B1, revisao do contrato universal, politica de dependencias/containers e evidencia de reproducao por outro executor.
 
-O avaliador multi-seed em `src/benchmark_core/evaluation.py` e as metricas em `src/benchmark_core/metrics.py` formam a primeira camada de análise. O próximo trabalho deve gerar relatório por run sem perder retornos individuais, antes de ampliar a cobertura de capacidades C2-C11.
+O avaliador multi-seed em `src/benchmark_core/evaluation.py` e as metricas em `src/benchmark_core/metrics.py` formam a primeira camada de analise. O fluxo `execute_run` preserva raw, metricas, logs, manifests e registry por `run_id`. O proximo trabalho cientifico e aprovar a matriz B1 corrigida e validar uma vertical C1; os prototipos C2-C11 nao autorizam expansao confirmatoria antes disso.
 
 ## Skills evolutivas
 

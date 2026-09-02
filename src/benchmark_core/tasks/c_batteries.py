@@ -1,80 +1,102 @@
-"""Public development tasks for C2-C11 capacities."""
+"""Public development prototypes aligned with the normative C2-C9 taxonomy.
+
+These helpers exercise contracts and controls. They are not sealed tasks and do
+not constitute construct validation or a gate freeze.
+"""
 
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any
+import random
+import re
+from typing import Any, Protocol
 
-from .c1_learning import C1BanditConfig, C1BanditEnvironment
+from .c1_learning import C1BanditConfig
+
+
+PUBLIC_CAPACITY_NAMES: dict[str, str] = {
+    "C1": "learning",
+    "C2": "sample_efficiency",
+    "C3": "generalization",
+    "C4": "adaptation",
+    "C5": "temporal_dependency",
+    "C6": "planning",
+    "C7": "continual_learning",
+    "C8": "robustness",
+    "C9": "multidomain_transfer",
+    "C10": "uncertainty",
+    "C11": "computational_efficiency",
+}
 
 
 @dataclass(frozen=True)
 class C2SampleEfficiencyConfig:
-    """C2: Threshold-focused analysis of C1."""
+    """Checkpoint protocol layered on an approved C1 family."""
 
     base_config: C1BanditConfig = C1BanditConfig()
-    threshold_percentile: float = 0.75
+    checkpoints: tuple[int, ...] = (10, 25, 50, 100)
+
+    def validate(self) -> None:
+        self.base_config.validate()
+        if not self.checkpoints or any(step <= 0 for step in self.checkpoints):
+            raise ValueError("checkpoints must be positive")
+        if tuple(sorted(set(self.checkpoints))) != self.checkpoints:
+            raise ValueError("checkpoints must be unique and increasing")
+        if self.checkpoints[-1] > self.base_config.max_steps:
+            raise ValueError("checkpoints cannot exceed the C1 budget")
 
 
 @dataclass(frozen=True)
-class C3RobustnessConfig:
-    """C3: Variant probabilities for robustness check."""
+class C3GeneralizationConfig:
+    """Explicit TRAIN/ID/OOD/structural development partitions."""
 
-    base_config: C1BanditConfig = C1BanditConfig(reward_probabilities=(0.3, 0.7))
+    train_probabilities: tuple[float, float] = (0.2, 0.8)
+    id_heldout_probabilities: tuple[float, float] = (0.25, 0.75)
+    ood_probabilities: tuple[float, float] = (0.4, 0.6)
+    structural_transfer_encoding: tuple[str, str] = ("left", "right")
+
+    def partitions(self) -> dict[str, dict[str, Any]]:
+        values = {
+            "TRAIN": {"reward_probabilities": self.train_probabilities, "encoding": (0, 1)},
+            "ID_HELDOUT": {"reward_probabilities": self.id_heldout_probabilities, "encoding": (0, 1)},
+            "OOD": {"reward_probabilities": self.ood_probabilities, "encoding": (0, 1)},
+            "STRUCTURAL_TRANSFER": {
+                "reward_probabilities": self.train_probabilities,
+                "encoding": self.structural_transfer_encoding,
+            },
+        }
+        for partition in values.values():
+            C1BanditConfig(reward_probabilities=partition["reward_probabilities"]).validate()
+        if len(set(self.structural_transfer_encoding)) != 2:
+            raise ValueError("structural transfer encoding must contain two distinct actions")
+        return values
 
 
 @dataclass(frozen=True)
-class C5DynamicChangeConfig:
-    """C5: Probability switch at mid-point."""
+class C4AdaptationConfig:
+    """Unannounced within-episode probability drift."""
 
     initial_probabilities: tuple[float, float] = (0.2, 0.8)
-    switch_at_step: int = 50
+    change_at_step: int = 50
     final_probabilities: tuple[float, float] = (0.7, 0.3)
     max_steps: int = 100
 
-
-class C5DynamicEnvironment:
-    def __init__(self, config: C5DynamicChangeConfig | None = None) -> None:
-        self.config = config or C5DynamicChangeConfig()
-        self._step = 0
-        self._base_env = C1BanditEnvironment(
-            C1BanditConfig(reward_probabilities=self.config.initial_probabilities, max_steps=self.config.max_steps)
-        )
-
-    def reset(self, seed: int) -> int:
-        self._step = 0
-        return self._base_env.reset(seed)
-
-    def step(self, action: Any) -> tuple[int, float, bool, bool, dict[str, Any]]:
-        if self._step == self.config.switch_at_step:
-            self._base_env = C1BanditEnvironment(
-                C1BanditConfig(reward_probabilities=self.config.final_probabilities, max_steps=self.config.max_steps)
-            )
-            self._base_env.reset(0)
-        self._step += 1
-        return self._base_env.step(action)
+    def validate(self) -> None:
+        C1BanditConfig(self.initial_probabilities, self.max_steps).validate()
+        C1BanditConfig(self.final_probabilities, self.max_steps).validate()
+        if not 1 <= self.change_at_step < self.max_steps:
+            raise ValueError("change_at_step must be inside the episode")
+        if self.initial_probabilities == self.final_probabilities:
+            raise ValueError("adaptation requires a real distribution change")
 
 
-@dataclass(frozen=True)
-class C6AdversarialConfig:
-    """C6: Inverted reward probabilities."""
+class C4AdaptationEnvironment:
+    """Bandit drift prototype without an observation-side change flag."""
 
-    base_config: C1BanditConfig = C1BanditConfig(reward_probabilities=(0.8, 0.2))
-
-
-@dataclass(frozen=True)
-class C10ExpandedActionConfig:
-    """C10: Bandit with N actions instead of 2."""
-
-    num_actions: int = 4
-    reward_probabilities: tuple[float, ...] = (0.2, 0.4, 0.6, 0.8)
-    max_steps: int = 100
-
-
-class CExpandedBanditEnvironment:
-    def __init__(self, config: C10ExpandedActionConfig | None = None) -> None:
-        self.config = config or C10ExpandedActionConfig()
-        self._random = __import__("random").Random()
+    def __init__(self, config: C4AdaptationConfig | None = None) -> None:
+        self.config = config or C4AdaptationConfig()
+        self.config.validate()
+        self._random = random.Random()
         self._steps = 0
 
     def reset(self, seed: int) -> int:
@@ -85,156 +107,203 @@ class CExpandedBanditEnvironment:
         return 0
 
     def step(self, action: Any) -> tuple[int, float, bool, bool, dict[str, Any]]:
-        if isinstance(action, bool) or not isinstance(action, int) or action < 0 or action >= self.config.num_actions:
-            raise ValueError(f"action must be integer in [0, {self.config.num_actions - 1}]")
+        if isinstance(action, bool) or not isinstance(action, int) or action not in (0, 1):
+            raise ValueError("action must be integer 0 or 1")
+        probabilities = (
+            self.config.initial_probabilities
+            if self._steps < self.config.change_at_step
+            else self.config.final_probabilities
+        )
+        reward = 1.0 if self._random.random() < probabilities[action] else 0.0
         self._steps += 1
-        probability = self.config.reward_probabilities[action]
-        reward = 1.0 if self._random.random() < probability else 0.0
         terminated = self._steps >= self.config.max_steps
-        return 0, reward, terminated, False, {}
+        return 0, reward, terminated, False, {"phase": "pre" if self._steps <= self.config.change_at_step else "post"}
 
 
 @dataclass(frozen=True)
-class C4GeneralizationConfig:
-    """C4: Train/test split for generalization."""
+class C5TemporalDependencyConfig:
+    """Delayed-cue task where the decision observation omits the cue."""
 
-    base_config: C1BanditConfig = C1BanditConfig()
-    train_fraction: float = 0.8
+    delay: int = 5
+    distractor_observation: int = -1
 
-
-@dataclass(frozen=True)
-class C7InterpretabilityConfig:
-    """C7: Track decision complexity."""
-
-    base_config: C1BanditConfig = C1BanditConfig()
-
-
-class C7InterpretabilityTracker:
-    def __init__(self, config: C7InterpretabilityConfig | None = None) -> None:
-        self.config = config or C7InterpretabilityConfig()
-        self._env = C1BanditEnvironment(self.config.base_config)
-        self._decisions: list[int] = []
-
-    def reset(self, seed: int) -> int:
-        self._decisions = []
-        return self._env.reset(seed)
-
-    def step(self, action: Any) -> tuple[int, float, bool, bool, dict[str, Any]]:
-        self._decisions.append(action)
-        return self._env.step(action)
-
-    def decision_complexity(self) -> float:
-        """Return 0 for deterministic (always 0 or 1), 1 for mixed."""
-        if not self._decisions:
-            return 0.0
-        unique = len(set(self._decisions))
-        return float(unique - 1)
+    def validate(self) -> None:
+        if self.delay < 1:
+            raise ValueError("delay must be at least one step")
+        if self.distractor_observation in (0, 1):
+            raise ValueError("distractor observation cannot reveal the binary cue")
 
 
-@dataclass(frozen=True)
-class C8CompositionConfig:
-    """C8: Two-phase task composition."""
-
-    phase1_probabilities: tuple[float, float] = (0.2, 0.8)
-    phase2_probabilities: tuple[float, float] = (0.4, 0.6)
-    steps_per_phase: int = 50
-
-
-class C8CompositionEnvironment:
-    def __init__(self, config: C8CompositionConfig | None = None) -> None:
-        self.config = config or C8CompositionConfig()
-        self._phase = 1
-        self._step_in_phase = 0
-        self._env = C1BanditEnvironment(C1BanditConfig(reward_probabilities=self.config.phase1_probabilities, max_steps=self.config.steps_per_phase * 2))
-
-    def reset(self, seed: int) -> int:
-        self._phase = 1
-        self._step_in_phase = 0
-        return self._env.reset(seed)
-
-    def step(self, action: Any) -> tuple[int, float, bool, bool, dict[str, Any]]:
-        if self._step_in_phase >= self.config.steps_per_phase:
-            self._phase = 2
-            self._step_in_phase = 0
-            self._env = C1BanditEnvironment(C1BanditConfig(reward_probabilities=self.config.phase2_probabilities, max_steps=self.config.steps_per_phase))
-
-        obs, reward, terminated, truncated, info = self._env.step(action)
-        self._step_in_phase += 1
-        info["phase"] = self._phase
-        return obs, reward, terminated, truncated, info
-
-
-@dataclass(frozen=True)
-class C9MultiagentConfig:
-    """C9: Two-agent competitive environment."""
-
-    num_agents: int = 2
-    num_actions: int = 2
-    max_steps: int = 100
-
-
-class C9MultiagentEnvironment:
-    def __init__(self, config: C9MultiagentConfig | None = None) -> None:
-        self.config = config or C9MultiagentConfig()
-        self._random = __import__("random").Random()
+class C5TemporalDependencyEnvironment:
+    def __init__(self, config: C5TemporalDependencyConfig | None = None) -> None:
+        self.config = config or C5TemporalDependencyConfig()
+        self.config.validate()
+        self._random = random.Random()
+        self._cue = 0
         self._steps = 0
-        self._agent_actions: list[int] = [0] * self.config.num_agents
 
     def reset(self, seed: int) -> int:
+        if not isinstance(seed, int) or isinstance(seed, bool) or seed < 0:
+            raise ValueError("seed must be a non-negative integer")
         self._random.seed(seed)
+        self._cue = self._random.randrange(2)
         self._steps = 0
-        self._agent_actions = [0] * self.config.num_agents
-        return 0
+        return self._cue
 
-    def step(self, actions: list[int]) -> tuple[int, list[float], bool, bool, dict[str, Any]]:
-        """Step with multiple agent actions, return rewards for each."""
-        if len(actions) != self.config.num_agents:
-            raise ValueError(f"Expected {self.config.num_agents} actions")
-        self._agent_actions = actions
+    def step(self, action: Any) -> tuple[int, float, bool, bool, dict[str, Any]]:
+        if isinstance(action, bool) or not isinstance(action, int) or action not in (0, 1):
+            raise ValueError("action must be integer 0 or 1")
         self._steps += 1
-        
-        rewards = []
-        for action in actions:
-            if isinstance(action, bool) or not isinstance(action, int) or action < 0 or action >= self.config.num_actions:
-                raise ValueError(f"action must be integer in [0, {self.config.num_actions - 1}]")
-            # Reward is shared: better when agents coordinate on same best action
-            prob = 0.8 if action == 1 else 0.2
-            reward = 1.0 if self._random.random() < prob else 0.0
-            rewards.append(reward)
-
-        terminated = self._steps >= self.config.max_steps
-        return 0, rewards, terminated, False, {}
+        decision = self._steps > self.config.delay
+        reward = 1.0 if decision and action == self._cue else 0.0
+        return self.config.distractor_observation, reward, decision, False, {"decision": decision}
 
 
 @dataclass(frozen=True)
-class C11AuditConfig:
-    """C11: Auditability and replay validation."""
+class C6PlanningConfig:
+    """Immediate-versus-delayed return conflict."""
 
-    base_config: C1BanditConfig = C1BanditConfig()
+    horizon: int = 5
+    myopic_immediate: float = 1.0
+    myopic_delayed: float = -2.0
+    farsighted_immediate: float = -0.5
+    farsighted_delayed: float = 3.0
+
+    def validate(self) -> None:
+        if self.horizon < 2:
+            raise ValueError("planning horizon must be at least two")
+        if self.myopic_immediate <= self.farsighted_immediate:
+            raise ValueError("action 0 must be locally attractive")
+        if self.myopic_immediate + self.myopic_delayed >= self.farsighted_immediate + self.farsighted_delayed:
+            raise ValueError("action 1 must have the better delayed return")
 
 
-class C11AuditEnvironment:
-    def __init__(self, config: C11AuditConfig | None = None) -> None:
-        self.config = config or C11AuditConfig()
-        self._env = C1BanditEnvironment(self.config.base_config)
-        self._trajectory: list[dict[str, Any]] = []
+class C6PlanningEnvironment:
+    def __init__(self, config: C6PlanningConfig | None = None) -> None:
+        self.config = config or C6PlanningConfig()
+        self.config.validate()
+        self._steps = 0
+        self._first_action: int | None = None
 
-    def reset(self, seed: int) -> int:
-        self._trajectory = []
-        obs = self._env.reset(seed)
-        self._trajectory.append({"step": 0, "action": None, "reward": None, "obs": obs})
-        return obs
+    def reset(self, seed: int) -> str:
+        if not isinstance(seed, int) or isinstance(seed, bool) or seed < 0:
+            raise ValueError("seed must be a non-negative integer")
+        self._steps = 0
+        self._first_action = None
+        return "choose"
 
-    def step(self, action: Any) -> tuple[int, float, bool, bool, dict[str, Any]]:
-        obs, reward, terminated, truncated, info = self._env.step(action)
-        self._trajectory.append({
-            "action": action,
-            "reward": reward,
-            "obs": obs,
-            "terminated": terminated,
-        })
-        return obs, reward, terminated, truncated, info
+    def step(self, action: Any) -> tuple[str, float, bool, bool, dict[str, Any]]:
+        if isinstance(action, bool) or not isinstance(action, int) or action not in (0, 1):
+            raise ValueError("action must be integer 0 or 1")
+        self._steps += 1
+        if self._first_action is None:
+            self._first_action = action
+            reward = self.config.myopic_immediate if action == 0 else self.config.farsighted_immediate
+        elif self._steps == self.config.horizon:
+            reward = self.config.myopic_delayed if self._first_action == 0 else self.config.farsighted_delayed
+        else:
+            reward = 0.0
+        terminated = self._steps >= self.config.horizon
+        return "wait", reward, terminated, False, {}
 
-    def get_trajectory(self) -> list[dict[str, Any]]:
-        """Return full audit trail."""
-        return self._trajectory.copy()
+
+@dataclass(frozen=True)
+class C7ContinualLearningConfig:
+    """Ordered public task labels for performance-matrix evaluation."""
+
+    tasks: tuple[str, ...] = ("A", "B", "C", "D")
+    interactions_per_task: int = 100
+
+    def validate(self) -> None:
+        if len(self.tasks) < 2 or len(set(self.tasks)) != len(self.tasks):
+            raise ValueError("continual learning requires unique ordered tasks")
+        if self.interactions_per_task <= 0:
+            raise ValueError("interactions_per_task must be positive")
+
+
+def forgetting_from_performance_matrix(matrix: list[list[float]]) -> tuple[float, ...]:
+    """Return per-task best-prior minus final performance.
+
+    Rows represent training phases and columns represent retested tasks. Values
+    that were not yet measured must be omitted by using shorter rows.
+    """
+
+    if not matrix or any(not row for row in matrix):
+        raise ValueError("performance matrix cannot be empty")
+    width = len(matrix[-1])
+    if any(len(row) > width for row in matrix):
+        raise ValueError("matrix rows cannot exceed final width")
+    forgetting: list[float] = []
+    for task_index in range(width):
+        observed = [row[task_index] for row in matrix if task_index < len(row)]
+        forgetting.append(max(observed) - observed[-1])
+    return tuple(forgetting)
+
+
+class PublicEnvironment(Protocol):
+    def reset(self, seed: int) -> Any: ...
+
+    def step(self, action: Any) -> tuple[Any, float, bool, bool, dict[str, Any]]: ...
+
+
+@dataclass(frozen=True)
+class C8RobustnessConfig:
+    """Missing-observation perturbation independent from task reward."""
+
+    missing_probability: float = 0.1
+    missing_sentinel: str = "MISSING"
+
+    def validate(self) -> None:
+        if not 0.0 <= self.missing_probability <= 1.0:
+            raise ValueError("missing_probability must be between zero and one")
+
+
+class C8MissingObservationWrapper:
+    def __init__(self, environment: PublicEnvironment, config: C8RobustnessConfig | None = None) -> None:
+        self.environment = environment
+        self.config = config or C8RobustnessConfig()
+        self.config.validate()
+        self._random = random.Random()
+
+    def _perturb(self, observation: Any) -> Any:
+        if self._random.random() < self.config.missing_probability:
+            return self.config.missing_sentinel
+        return observation
+
+    def reset(self, seed: int) -> Any:
+        self._random.seed(seed ^ 0xC8)
+        return self._perturb(self.environment.reset(seed))
+
+    def step(self, action: Any) -> tuple[Any, float, bool, bool, dict[str, Any]]:
+        observation, reward, terminated, truncated, info = self.environment.step(action)
+        return self._perturb(observation), reward, terminated, truncated, info
+
+
+@dataclass(frozen=True)
+class C9DomainSpec:
+    name: str
+    family: str
+    observation_protocol: str
+    action_protocol: str
+
+    def validate(self) -> None:
+        if not all(value.strip() for value in (self.name, self.family, self.observation_protocol, self.action_protocol)):
+            raise ValueError("domain fields must be non-empty")
+
+
+@dataclass(frozen=True)
+class C9MultidomainTransferConfig:
+    """Declares distinct public domains evaluated with one frozen core hash."""
+
+    domains: tuple[C9DomainSpec, ...]
+    core_hash: str
+
+    def validate(self) -> None:
+        if len(self.domains) < 2:
+            raise ValueError("multidomain transfer requires at least two domains")
+        for domain in self.domains:
+            domain.validate()
+        if len({domain.family for domain in self.domains}) < 2:
+            raise ValueError("domains must come from distinct structural families")
+        if re.fullmatch(r"sha256:[0-9a-f]{64}", self.core_hash) is None:
+            raise ValueError("core_hash must be a sha256 digest")

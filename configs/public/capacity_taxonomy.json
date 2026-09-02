@@ -1,0 +1,17 @@
+{
+  "status": "CORRECTIVE_DRAFT_PUBLIC",
+  "change_id": "CHG-2026-09-01-GATE-REALIGNMENT",
+  "capacities": [
+    {"id": "C1", "name": "learning"},
+    {"id": "C2", "name": "sample_efficiency"},
+    {"id": "C3", "name": "generalization"},
+    {"id": "C4", "name": "adaptation"},
+    {"id": "C5", "name": "temporal_dependency"},
+    {"id": "C6", "name": "planning"},
+    {"id": "C7", "name": "continual_learning"},
+    {"id": "C8", "name": "robustness"},
+    {"id": "C9", "name": "multidomain_transfer"},
+    {"id": "C10", "name": "uncertainty"},
+    {"id": "C11", "name": "computational_efficiency"}
+  ]
+}

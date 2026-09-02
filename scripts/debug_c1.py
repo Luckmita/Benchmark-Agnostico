@@ -1,15 +1,10 @@
 #!/usr/bin/env python3
 """Debug C1 evaluation."""
 
-import sys
-from pathlib import Path
-
-sys.path.insert(0, str(Path(__file__).parent.parent))
-
-from src.benchmark_core.tasks import C1BanditConfig, C1BanditEnvironment, RandomAgent
-from src.benchmark_core.episode import run_episode
-from src.benchmark_core.protocol import AgentSpecification, AgentCapabilities
-from src.benchmark_core.manifest import AgentManifest
+from benchmark_core.tasks import C1BanditConfig, C1BanditEnvironment, RandomAgent
+from benchmark_core.episode import run_episode
+from benchmark_core.protocol import AgentSpecification, AgentCapabilities
+from benchmark_core.manifest import AgentManifest
 
 
 def test_single_episode() -> None:
