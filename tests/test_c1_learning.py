@@ -8,12 +8,15 @@ from benchmark_core.tasks import C1BanditConfig, C1BanditEnvironment, EpsilonGre
 
 class C1LearningTests(unittest.TestCase):
     def setUp(self) -> None:
-        self.manifest = AgentManifest("1", "c1-development", "0.1", declared_timeout_seconds=2)
+        self.capabilities = AgentCapabilities(online_learning=True)
+        self.manifest = AgentManifest(
+            "1", "c1-development", "0.1", capabilities=self.capabilities, declared_timeout_seconds=2
+        )
         self.specification = AgentSpecification(
             observation_space="constant",
             action_space="{0,1}",
             seed=17,
-            capabilities=AgentCapabilities(online_learning=True),
+            capabilities=self.capabilities,
         )
 
     def test_environment_is_reproducible_after_reset(self) -> None:
@@ -43,7 +46,7 @@ class C1LearningTests(unittest.TestCase):
             RandomAgent,
             C1BanditEnvironment(config),
             self.specification,
-            AgentManifest("1", "random", "0.1", declared_timeout_seconds=2),
+            AgentManifest("1", "random", "0.1", capabilities=self.capabilities, declared_timeout_seconds=2),
             max_steps=config.max_steps,
         )
         self.assertEqual(learning.status, "PASS")

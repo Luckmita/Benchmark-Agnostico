@@ -57,11 +57,12 @@ class EpisodeTests(unittest.TestCase):
             1,
             AgentCapabilities(online_learning=True),
         )
+        capabilities = specification.capabilities
         result = run_episode(
             StatefulAgent,
             CounterEnvironment(),
             specification,
-            AgentManifest("1", "stateful", "1", declared_timeout_seconds=1),
+            AgentManifest("1", "stateful", "1", capabilities=capabilities, declared_timeout_seconds=1),
             max_steps=5,
         )
         self.assertEqual(result.status, "PASS")

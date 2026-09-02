@@ -9,11 +9,12 @@ from benchmark_core.tasks import C1BanditConfig, C1BanditEnvironment, EpsilonGre
 class EvaluationTests(unittest.TestCase):
     def test_evaluation_preserves_seed_level_results(self) -> None:
         config = C1BanditConfig(max_steps=20)
+        capabilities = AgentCapabilities(online_learning=True)
         report = evaluate_agent(
             EpsilonGreedyAgent,
             lambda: C1BanditEnvironment(config),
-            AgentSpecification("constant", "{0,1}", 0, AgentCapabilities(online_learning=True)),
-            AgentManifest("1", "epsilon", "1", declared_timeout_seconds=2),
+            AgentSpecification("constant", "{0,1}", 0, capabilities),
+            AgentManifest("1", "epsilon", "1", capabilities=capabilities, declared_timeout_seconds=2),
             seeds=[1, 2, 3],
             max_steps=config.max_steps,
         )

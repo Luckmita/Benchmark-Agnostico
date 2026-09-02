@@ -6,6 +6,8 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from benchmark_core import (
+    AgentCapabilities,
+    AgentDecision,
     AgentManifest,
     AgentSpecification,
     RunRegistry,
@@ -42,6 +44,16 @@ class SlowAgent(FastAgent):
         return 4
 
 
+class UncertainAgent(FastAgent):
+    def act(self) -> AgentDecision:
+        return AgentDecision(action=3, confidence=0.9)
+
+
+class InvalidUncertainAgent(FastAgent):
+    def act(self) -> int:
+        return 3
+
+
 class RunnerTests(unittest.TestCase):
     def setUp(self) -> None:
         self.specification = AgentSpecification("observation", "action", 1)
@@ -54,6 +66,19 @@ class RunnerTests(unittest.TestCase):
     def test_slow_action_is_terminated(self) -> None:
         result = run_action(SlowAgent, self.specification, AgentManifest("1", "slow", "1", declared_timeout_seconds=0.02), {})
         self.assertEqual(result.status, "TIMEOUT")
+
+    def test_uncertainty_capability_requires_valid_decision_envelope(self) -> None:
+        capabilities = AgentCapabilities(uncertainty=True)
+        specification = AgentSpecification("observation", "action", 1, capabilities)
+        manifest = AgentManifest("1", "uncertain", "1", capabilities=capabilities)
+        result = run_action(UncertainAgent, specification, manifest, {})
+        self.assertEqual(result.status, "PASS")
+        self.assertEqual(result.action, 3)
+        self.assertEqual(result.confidence, 0.9)
+
+        invalid = run_action(InvalidUncertainAgent, specification, manifest, {})
+        self.assertEqual(invalid.status, "ERROR")
+        self.assertIn("AgentDecision", invalid.error)
 
     def test_registry_is_append_only_and_hash_is_stable(self) -> None:
         with TemporaryDirectory() as directory:

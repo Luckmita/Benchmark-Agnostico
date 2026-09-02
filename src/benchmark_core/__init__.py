@@ -1,6 +1,6 @@
 """Public contracts for the benchmark core."""
 
-from .manifest import AgentManifest, check_determinism, validate_specification
+from .manifest import AgentManifest, check_determinism, validate_contract, validate_specification
 from .episode import EpisodeResult, run_episode
 from .evaluation import evaluate_agent
 from .metrics import (
@@ -16,7 +16,7 @@ from .metrics import (
     win_rate,
 )
 from .artifacts import ArtifactStore
-from .protocol import AgentCapabilities, AgentProtocolError, AgentSpecification, Transition, validate_agent
+from .protocol import AgentCapabilities, AgentDecision, AgentProtocolError, AgentSpecification, Transition, validate_agent
 from .registry import RunRecord, RunRegistry, hash_file, hash_json, hash_paths, hash_source_tree
 from .runner import RunResult, record_result, run_action
 from .run import execute_run
@@ -24,6 +24,7 @@ from .resources import ResourceMeasurement, measure_callable
 
 __all__ = [
     "AgentCapabilities",
+    "AgentDecision",
     "AgentManifest",
     "AgentProtocolError",
     "AgentSpecification",
@@ -56,5 +57,6 @@ __all__ = [
     "validate_specification",
     "win_rate",
     "validate_agent",
+    "validate_contract",
     "measure_callable",
 ]

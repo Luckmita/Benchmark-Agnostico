@@ -18,6 +18,7 @@
 | D-012 | Reabrir B1 e classificar os freezes de 2026-09-01 como historicos, sem efeito de liberacao | a evidencia nao satisfaz a ordem B1-B15, a taxonomia normativa ou os criterios de validade | adotada em 2026-09-01 |
 | D-013 | Reservar B14 para release candidate, B15 para replicacao independente e B16 para submissao | restaura a semantica normativa dos gates e impede entrada prematura de candidatos | adotada em 2026-09-01 |
 | D-014 | Aprovar B1 corrigido como definicao de construtos e estrutura de protocolos C1-C11 | a aprovacao explicita do responsavel aceita a taxonomia, hipoteses, controles, metricas e criterios de invalidacao; parametros quantitativos continuam sujeitos a preregistro | adotada em 2026-09-02 |
+| D-015 | Versionar o contrato universal v0.1 com capabilities estritas e `AgentDecision` para incerteza | elimina divergencia entre manifest/runtime e torna a capability C10 observavel sem exigir mecanismo interno | adotada em 2026-09-02 |
 
 ## Pendencias que bloqueiam freeze
 
@@ -66,3 +67,13 @@ Toda alteracao relevante deve adicionar uma entrada com `CHANGE-ID`, motivacao, 
 - Risco de vies: controlado pela aprovacao anterior a candidatos e pela proibicao de usar resultados exploratorios para escolher parametros confirmatorios.
 - Resultado esperado: iniciar revisao formal de B2 sem liberar B3-B16.
 - Evidencia: `docs/reviews/B1_CORRECTIVE_APPROVAL_2026-09-02.md`.
+
+### CHG-2026-09-02-B2-UNIVERSAL-API
+
+- Motivacao: a revisao B2 encontrou capabilities sem validacao de tipo, divergencia possivel entre manifest/specification, persistencia nao serializavel e ausencia de formato observavel para incerteza.
+- Impacto cientifico: define como acao e confianca chegam ao ambiente e a C10; nao altera reward, tarefa, seed, budget ou scoring.
+- Testes afetados: protocolo, manifest, runner, episodios, avaliacao, CLI e schema.
+- Compatibilidade: agentes sem incerteza continuam retornando acao bruta; manifests ganham defaults publicos validos. Agentes que declaram incerteza devem retornar `AgentDecision`.
+- Risco de vies: baixo; o envelope e arquiteturalmente neutro e aceita qualquer mecanismo interno.
+- Resultado esperado: contrato black-box rejeita declaracoes inconsistentes antes do run e preserva confianca no raw.
+- Evidencia: `docs/contracts/UNIVERSAL_AGENT_API_V0.1.md` e `docs/reviews/B2_GATE_REVIEW_2026-09-02.md`.

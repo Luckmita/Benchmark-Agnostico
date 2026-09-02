@@ -23,7 +23,7 @@ O benchmark deve ser construido, validado e congelado antes da entrada de qualqu
 
 ## Estado atual
 
-O charter B0 e o construct framework B1 corrigido foram aprovados. B2 e o gate atual, em revisao formal do contrato universal. Existem componentes experimentais de B2/B3 e tarefas publicas de desenvolvimento, mas nenhum gate B2-B15 esta atualmente aprovado como concluido.
+O charter B0, o construct framework B1 e o contrato universal B2 foram aprovados. B3 e o gate atual, em revisao da infraestrutura experimental. Existem componentes experimentais de B3 e tarefas publicas de desenvolvimento, mas nenhum gate B3-B15 esta atualmente aprovado como concluido.
 
 Os registros de freeze de 2026-09-01 sao preservados como historico, porem nao autorizam conjunto selado, release candidate, replicacao ou submissao. O plano e a auditoria vigentes estao em [Plano de revisao corretiva](docs/CORRECTIVE_REVIEW_PLAN.md) e [Auditoria de gates](docs/reviews/GATE_AUDIT_2026-09-01.md).
 

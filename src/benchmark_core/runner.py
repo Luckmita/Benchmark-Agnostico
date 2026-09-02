@@ -7,8 +7,8 @@ import time
 from dataclasses import dataclass
 from typing import Any, Callable
 
-from .manifest import AgentManifest
-from .protocol import AgentProtocol, AgentSpecification, validate_agent
+from .manifest import AgentManifest, validate_contract
+from .protocol import AgentProtocol, AgentSpecification, normalize_decision, validate_agent
 from .registry import RunRecord, RunRegistry
 
 
@@ -17,6 +17,7 @@ class RunResult:
     status: str
     action: Any = None
     reward: float | None = None
+    confidence: float | None = None
     elapsed_seconds: float = 0.0
     error: str = ""
 
@@ -31,9 +32,12 @@ def _act_worker(
         agent = factory()
         validate_agent(agent, specification)
         agent.observe(observation)
-        result_queue.put(("PASS", agent.act(), ""))
+        decision = normalize_decision(
+            agent.act(), uncertainty_declared=specification.capabilities.uncertainty
+        )
+        result_queue.put(("PASS", decision.action, decision.confidence, ""))
     except Exception as error:  # worker boundary must serialize failures
-        result_queue.put(("ERROR", None, f"{type(error).__name__}: {error}"))
+        result_queue.put(("ERROR", None, None, f"{type(error).__name__}: {error}"))
 
 
 def run_action(
@@ -44,7 +48,7 @@ def run_action(
 ) -> RunResult:
     """Run one black-box action in a fresh process with a hard timeout."""
 
-    manifest.validate()
+    validate_contract(manifest, specification)
     start = time.monotonic()
     context = mp.get_context("spawn")
     result_queue: mp.Queue[Any] = context.Queue()
@@ -58,8 +62,8 @@ def run_action(
         return RunResult("TIMEOUT", elapsed_seconds=elapsed, error="declared timeout exceeded")
     if result_queue.empty():
         return RunResult("ERROR", elapsed_seconds=elapsed, error="worker exited without a result")
-    status, action, error = result_queue.get()
-    return RunResult(status, action=action, elapsed_seconds=elapsed, error=error)
+    status, action, confidence, error = result_queue.get()
+    return RunResult(status, action=action, confidence=confidence, elapsed_seconds=elapsed, error=error)
 
 
 def record_result(

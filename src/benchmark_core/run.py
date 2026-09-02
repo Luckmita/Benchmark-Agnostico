@@ -64,6 +64,7 @@ def execute_run(
                     "step": index,
                     "action": item.action,
                     "reward": item.reward,
+                    "confidence": item.confidence,
                     "action_elapsed_seconds": item.elapsed_seconds,
                 }
                 for index, item in enumerate(result.action_results, start=1)

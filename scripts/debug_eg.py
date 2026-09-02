@@ -24,6 +24,7 @@ def test_eg() -> None:
         manifest_version="1.0",
         agent_id="C1_EG_Debug",
         implementation_version="1.0",
+        capabilities=spec.capabilities,
         declared_timeout_seconds=5.0,
     )
     
@@ -35,7 +36,7 @@ def test_eg() -> None:
     print("\nRunning episode with factory...")
     
     def eg_factory() -> EpsilonGreedyAgent:
-        return EpsilonGreedyAgent(epsilon=0.1, alpha=0.1)
+        return EpsilonGreedyAgent(epsilon=0.1)
     
     result = run_episode(
         factory=eg_factory,

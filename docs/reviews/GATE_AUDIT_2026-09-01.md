@@ -15,8 +15,8 @@ Um gate recebe `PASS` somente quando cada criterio de saida possui evidencia rep
 | --- | --- | --- | --- | --- |
 | B0 | governanca e regras aprovadas | charter, decisoes e revisao B0/B1 | PASS historico | completar papeis nominais, licenca e mecanismo externo sem reabrir a regra central |
 | B1 | capacidades operacionalmente definidas | matriz e protocolos canonicos; aprovacao explicita de 2026-09-02 | PASS | parametros quantitativos permanecem sujeitos a preregistro antes dos runs confirmatorios |
-| B2 | contrato universal neutro funcionando | protocolo Python; manifest/schema alinhados; timeout, capabilities, hashes e testes de contrato | IN REVIEW | executar revisao formal do contrato universal |
-| B3 | registry, rastreabilidade e reproducao | instalacao limpa; runner isolado; CLI; registry; raw/metrics/logs/manifests; hashes e tempos por `run_id` | READY FOR REVIEW, sem avanco linear | lock/container por digest e reproducao por executor separado |
+| B2 | contrato universal neutro funcionando | contrato v0.1; manifest/schema; lifecycle; capabilities; testes | PASS | mudancas futuras no protocolo exigem CHANGE-ID |
+| B3 | registry, rastreabilidade e reproducao | instalacao limpa; runner isolado; CLI; registry; raw/metrics/logs/manifests; hashes e tempos por `run_id` | IN REVIEW | auditar unicidade, imutabilidade e ambiente reproduzivel |
 | B4 | controles implementados e validados | Random e EpsilonGreedy em bandit | BLOCKED | controles positivos/negativos pertinentes por construto |
 | B5 | aprendizagem e generalizacao | C1 exploratoria; generalizacao nao demonstrada | BLOCKED | vertical C1 valida e C3 TRAIN/ID/OOD/transfer |
 | B6 | dependencia temporal e planejamento | nenhum teste normativo | BLOCKED | tarefas que exijam retencao e consequencias atrasadas |

@@ -48,4 +48,4 @@ Se uma skill for criada ou alterada, registrar tambem gatilho, gate de origem, e
 
 ## Primeiro trabalho recomendado
 
-Revisar formalmente B2 contra o contrato universal, manifest/schema, lifecycle, determinismo, timeouts, limites e conformidade. Depois do PASS B2, revisar B3 sem pular a ordem linear. Nao tratar os experimentos historicos de 2026-09-01 como freeze.
+Revisar formalmente B3 contra registry, unicidade de `run_id`, raw imutavel, artefatos, hashes, ambiente reproduzivel e CLI. Nao tratar os experimentos historicos de 2026-09-01 como freeze.

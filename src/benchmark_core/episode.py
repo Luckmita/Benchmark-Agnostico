@@ -8,8 +8,8 @@ import pickle
 import time
 from typing import Any, Callable, Protocol
 
-from .manifest import AgentManifest
-from .protocol import AgentProtocol, AgentSpecification, Transition, validate_agent
+from .manifest import AgentManifest, validate_contract
+from .protocol import AgentProtocol, AgentSpecification, Transition, normalize_decision, validate_agent
 from .runner import RunResult
 
 
@@ -43,7 +43,7 @@ def run_episode(
 
     if max_steps <= 0:
         return EpisodeResult("ERROR", 0.0, 0, (), "max_steps must be positive")
-    manifest.validate()
+    validate_contract(manifest, specification)
     try:
         pickle.dumps((factory, environment, specification, action_validator))
     except (pickle.PicklingError, TypeError) as error:
@@ -82,14 +82,25 @@ def _episode_worker(
         for step in range(max_steps):
             agent.observe(observation)
             action_start = time.monotonic()
-            action = agent.act()
+            decision = normalize_decision(
+                agent.act(), uncertainty_declared=specification.capabilities.uncertainty
+            )
+            action = decision.action
             action_elapsed = time.monotonic() - action_start
             if action_validator is not None:
                 action_validator(action)
             next_observation, reward, terminated, truncated, _info = environment.step(action)
             reward = float(reward)
             total_reward += reward
-            action_results.append(RunResult("PASS", action=action, reward=reward, elapsed_seconds=action_elapsed))
+            action_results.append(
+                RunResult(
+                    "PASS",
+                    action=action,
+                    reward=reward,
+                    confidence=decision.confidence,
+                    elapsed_seconds=action_elapsed,
+                )
+            )
             if specification.capabilities.online_learning:
                 agent.learn(Transition(observation, action, reward, next_observation, terminated, truncated))
             observation = next_observation
