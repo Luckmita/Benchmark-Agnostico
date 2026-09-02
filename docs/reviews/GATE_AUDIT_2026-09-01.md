@@ -14,8 +14,8 @@ Um gate recebe `PASS` somente quando cada criterio de saida possui evidencia rep
 | Gate | Criterio normativo | Evidencia encontrada | Resultado | Bloqueador/proximo teste |
 | --- | --- | --- | --- | --- |
 | B0 | governanca e regras aprovadas | charter, decisoes e revisao B0/B1 | PASS historico | completar papeis nominais, licenca e mecanismo externo sem reabrir a regra central |
-| B1 | capacidades operacionalmente definidas | matriz inicial e protocolos exploratorios | BLOCKED | eliminar `PENDENTE`, alinhar C1-C11 e obter revisao cientifica |
-| B2 | contrato universal neutro funcionando | protocolo Python; manifest/schema alinhados; timeout, capabilities, hashes e testes de contrato | READY FOR REVIEW, sem avanco linear | aprovacao de B1 e revisao humana do contrato universal |
+| B1 | capacidades operacionalmente definidas | matriz e protocolos canonicos; aprovacao explicita de 2026-09-02 | PASS | parametros quantitativos permanecem sujeitos a preregistro antes dos runs confirmatorios |
+| B2 | contrato universal neutro funcionando | protocolo Python; manifest/schema alinhados; timeout, capabilities, hashes e testes de contrato | IN REVIEW | executar revisao formal do contrato universal |
 | B3 | registry, rastreabilidade e reproducao | instalacao limpa; runner isolado; CLI; registry; raw/metrics/logs/manifests; hashes e tempos por `run_id` | READY FOR REVIEW, sem avanco linear | lock/container por digest e reproducao por executor separado |
 | B4 | controles implementados e validados | Random e EpsilonGreedy em bandit | BLOCKED | controles positivos/negativos pertinentes por construto |
 | B5 | aprendizagem e generalizacao | C1 exploratoria; generalizacao nao demonstrada | BLOCKED | vertical C1 valida e C3 TRAIN/ID/OOD/transfer |
@@ -52,7 +52,7 @@ Um gate recebe `PASS` somente quando cada criterio de saida possui evidencia rep
 
 ## Decisao
 
-B1 e reaberto e todos os gates seguintes permanecem sem aprovacao vigente. Os resultados existentes sao preservados como experimentos exploratorios publicos. Nenhuma submissao candidata foi observada, portanto a correcao pode ocorrer sem contaminar o futuro conjunto selado.
+B1 foi reaberto pela correcao e posteriormente aprovado pelo responsavel do projeto em 2026-09-02. B2 e o gate atual; todos os gates B2-B16 permanecem sem aprovacao vigente. Os resultados existentes sao preservados como experimentos exploratorios publicos. Nenhuma submissao candidata foi observada.
 
 ## Skills
 

@@ -17,6 +17,7 @@
 | D-011 | Aprovar a proposta C1 para implementacao controlada, mantendo parametros pendentes fora do freeze | permite construir a primeira vertical sem fingir que o protocolo final esta congelado | adotada em 2026-09-01 |
 | D-012 | Reabrir B1 e classificar os freezes de 2026-09-01 como historicos, sem efeito de liberacao | a evidencia nao satisfaz a ordem B1-B15, a taxonomia normativa ou os criterios de validade | adotada em 2026-09-01 |
 | D-013 | Reservar B14 para release candidate, B15 para replicacao independente e B16 para submissao | restaura a semantica normativa dos gates e impede entrada prematura de candidatos | adotada em 2026-09-01 |
+| D-014 | Aprovar B1 corrigido como definicao de construtos e estrutura de protocolos C1-C11 | a aprovacao explicita do responsavel aceita a taxonomia, hipoteses, controles, metricas e criterios de invalidacao; parametros quantitativos continuam sujeitos a preregistro | adotada em 2026-09-02 |
 
 ## Pendencias que bloqueiam freeze
 
@@ -53,3 +54,15 @@ Toda alteracao relevante deve adicionar uma entrada com `CHANGE-ID`, motivacao, 
 - Risco de vies: baixo e redutor; a mudanca ocorre antes de qualquer submissao e remove claims nao sustentados.
 - Resultado esperado: IDs C1-C11 voltam a representar os construtos normativos e cada gate passa a depender de evidencia reproduzivel.
 - Evidencia: `docs/CORRECTIVE_REVIEW_PLAN.md` e `docs/reviews/GATE_AUDIT_2026-09-01.md`.
+
+### CHG-2026-09-02-B1-CORRECTIVE-APPROVAL
+
+- Motivacao: aprovacao explicita do responsavel do projeto para o B1 corrigido.
+- Impacto cientifico: a matriz e os protocolos canonicos C1-C11 passam de draft a estrutura metodologica aprovada; B2 torna-se o gate atual.
+- Escopo: construtos, hipoteses, familias de tarefas, controles, metricas, riscos de shortcut/leakage e criterios `TEST_INVALID`.
+- Fora do escopo: nao congela seeds, budgets, limiares, splits, bins, pesos, tarefas finais ou variantes seladas; esses itens exigem preregistro antes de experimento confirmatorio e freeze.
+- Testes afetados: governance check, taxonomia e revisao documental B1.
+- Compatibilidade: preserva os prototipos publicos e o historico superado; nao cria sealed nem altera resultados anteriores.
+- Risco de vies: controlado pela aprovacao anterior a candidatos e pela proibicao de usar resultados exploratorios para escolher parametros confirmatorios.
+- Resultado esperado: iniciar revisao formal de B2 sem liberar B3-B16.
+- Evidencia: `docs/reviews/B1_CORRECTIVE_APPROVAL_2026-09-02.md`.

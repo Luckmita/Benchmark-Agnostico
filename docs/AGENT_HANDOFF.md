@@ -48,4 +48,4 @@ Se uma skill for criada ou alterada, registrar tambem gatilho, gate de origem, e
 
 ## Primeiro trabalho recomendado
 
-Revisar cientificamente a matriz B1 corrigida e os protocolos canonicos em `docs/protocols/README.md`. Registrar responsavel, decisao e CHANGE-ID; depois validar uma vertical C1 completa antes de expandir o framework. Nao tratar os experimentos historicos de 2026-09-01 como freeze.
+Revisar formalmente B2 contra o contrato universal, manifest/schema, lifecycle, determinismo, timeouts, limites e conformidade. Depois do PASS B2, revisar B3 sem pular a ordem linear. Nao tratar os experimentos historicos de 2026-09-01 como freeze.

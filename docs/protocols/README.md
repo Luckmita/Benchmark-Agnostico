@@ -1,7 +1,8 @@
 # Protocolos de capacidades
 
-Status: `CORRECTIVE INDEX - 2026-09-01`  
-CHANGE-ID: `CHG-2026-09-01-GATE-REALIGNMENT`
+Status: `APPROVED AS B1 CONSTRUCT FRAMEWORK - 2026-09-02`
+
+CHANGE-ID: `CHG-2026-09-02-B1-CORRECTIVE-APPROVAL`
 
 ## Taxonomia canonica
 
@@ -19,7 +20,7 @@ CHANGE-ID: `CHG-2026-09-01-GATE-REALIGNMENT`
 | C10 | Incerteza | `C10_UNCERTAINTY_PREREGISTRATION.md` |
 | C11 | Eficiencia computacional | `C11_COMPUTATIONAL_EFFICIENCY_PREREGISTRATION.md` |
 
-Todos estao em estado de proposta corretiva. Nenhum protocolo canonico esta congelado.
+Todos foram aprovados como estrutura de construto B1. Nenhum parametro quantitativo ou protocolo confirmatorio esta congelado.
 
 ## Documentos historicos desalinhados
 

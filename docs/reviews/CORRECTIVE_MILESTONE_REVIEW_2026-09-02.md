@@ -6,6 +6,8 @@ CHANGE-ID: `CHG-2026-09-01-GATE-REALIGNMENT`
 Resultado do marco de engenharia: `PASS`  
 Resultado do gate atual B1: `BLOCKED`
 
+> Atualizacao posterior: B1 recebeu aprovacao explicita do responsavel em 2026-09-02. Consulte `B1_CORRECTIVE_APPROVAL_2026-09-02.md`. Este documento preserva o estado imediatamente anterior a essa aprovacao.
+
 ## Criterios revisados
 
 O gate atual e B1. Seu criterio de saida exige uma linha aprovada por capacidade, com construto, hipotese, controles, tarefas publica e selada planejada, metricas, estatistica, seeds/budget, testes de shortcut/leakage e `TEST_INVALID`.

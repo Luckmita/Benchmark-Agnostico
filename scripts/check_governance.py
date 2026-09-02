@@ -51,10 +51,14 @@ def check(root: Path) -> list[str]:
         if not first_line.startswith("# HISTORICO SUPERADO"):
             errors.append(f"historical protocol is not marked as superseded: {filename}")
     status = (root / "docs" / "STATUS.md").read_text(encoding="utf-8")
-    if "Gate atual: `B1 - BLOCKED" not in status:
-        errors.append("active status must keep B1 blocked until scientific approval")
+    if "Gate atual: `B2 - IN REVIEW`" not in status:
+        errors.append("active status must identify B2 as the gate under review")
+    if "Ultimo gate vigente aprovado: `B1`" not in status:
+        errors.append("active status must record B1 as the latest approved gate")
     if "submissao somente em B16" not in status:
         errors.append("active status must reserve submissions for B16")
+    if not (root / "docs" / "reviews" / "B1_CORRECTIVE_APPROVAL_2026-09-02.md").is_file():
+        errors.append("missing corrective B1 approval record")
     return errors
 
 

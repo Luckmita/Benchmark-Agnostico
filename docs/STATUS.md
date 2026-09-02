@@ -2,9 +2,9 @@
 
 - Data de referencia: 2026-09-02
 - Fonte normativa: `PLANO_DIRETOR_MESTRE_BENCHMARK_IA_ML.pdf`
-- Gate atual: `B1 - BLOCKED / REABERTO PARA CORRECAO`
-- Ultimo gate vigente aprovado: `B0`
-- CHANGE-ID ativo: `CHG-2026-09-01-GATE-REALIGNMENT`
+- Gate atual: `B2 - IN REVIEW`
+- Ultimo gate vigente aprovado: `B1`
+- CHANGE-ID ativo: `CHG-2026-09-02-B1-CORRECTIVE-APPROVAL`
 - Branch de trabalho: `fix/chg-2026-09-01-gate-realignment`
 - Barreira: nenhuma arquitetura candidata antes da conclusao de B14 e B15; submissao somente em B16
 
@@ -34,13 +34,14 @@ Essa evidencia pode ser reaproveitada, mas deve ser revalidada contra os criteri
 
 ## Gate review vigente
 
-Resultado: `BLOCKED`.
+Resultado B1: `PASS` em 2026-09-02, por aprovacao explicita do responsavel do projeto.
 
 | Gate | Estado | Evidencia ou bloqueador principal |
 | --- | --- | --- |
 | B0 | PASS historico | charter e revisao B0/B1 de 2026-08-31 |
-| B1 | BLOCKED | matriz incompleta e taxonomia/protocolos em realinhamento |
-| B2-B3 | PARTIAL, sem avanco linear | prototipos existem, mas reproducao e contratos precisam ser fechados |
+| B1 | PASS | matriz e protocolos canonicos aprovados como framework; parametros quantitativos exigem preregistro posterior |
+| B2 | IN REVIEW | contrato, manifest/schema, lifecycle e testes possuem prototipos executaveis |
+| B3 | PARTIAL, sem avanco linear | runner, registry e reproducao existem, mas dependem de fechamento B2 |
 | B4-B10 | NOT STARTED como gates | experimentos existentes sao exploratorios e nao cobrem os construtos normativos |
 | B11 | NOT STARTED | sem validacao completa do benchmark |
 | B12 | NOT STARTED | sem red team independente |
@@ -63,12 +64,12 @@ Revisao: `docs/reviews/CORRECTIVE_MILESTONE_REVIEW_2026-09-02.md`.
 
 ## Proximo passo executavel
 
-Concluir o realinhamento da matriz e dos protocolos C1-C11; depois submeter B1 a revisao cientifica humana. Enquanto B1 estiver bloqueado, implementacoes posteriores permanecem prototipos publicos e nenhum conjunto selado deve ser criado.
+Executar a revisao formal B2 contra contrato neutro, lifecycle, manifest/schema, determinismo, timeouts, limites e conformidade. Parametros quantitativos das baterias continuam fora de freeze e nenhum conjunto selado deve ser criado.
 
 ## Handoff
 
 - Agente: Codex
-- Objetivo: revisao corretiva de gates e reproducibilidade
+- Objetivo: B1 aprovado; preparar revisao formal B2
 - Plano: `docs/CORRECTIVE_REVIEW_PLAN.md`
 - Comandos-base: `python -m pytest -q`; `python scripts/skill_validator.py`; validacoes focadas registradas nos commits
 - Validacao limpa: `45 passed, 3 skipped`; governance e skill validator passaram; run publico C1 rastreavel passou

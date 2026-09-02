@@ -156,3 +156,5 @@ Estado: `CORRECTIVE ENGINEERING MILESTONE COMPLETE; B1 BLOCKED`.
 Validacao em ambiente virtual limpo: `45 passed, 3 skipped`; `scripts/check_governance.py` e `scripts/skill_validator.py` passaram; run publico C1 retornou `PASS` e gerou registry rastreavel.
 
 Relatorio de fechamento: `docs/reviews/CORRECTIVE_MILESTONE_REVIEW_2026-09-02.md`.
+
+Atualizacao: B1 foi aprovado posteriormente pelo responsavel do projeto em 2026-09-02, sob `CHG-2026-09-02-B1-CORRECTIVE-APPROVAL`. B2 passou a ser o gate atual; o escopo quantitativo continua condicionado a preregistro.

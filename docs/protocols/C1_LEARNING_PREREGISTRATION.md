@@ -1,12 +1,12 @@
 # C1 - Preregistracao de aprendizagem
 
-Status: `APPROVED FOR CONTROLLED IMPLEMENTATION - 2026-09-01`
+Status: `APPROVED AS B1 CONSTRUCT PROTOCOL - 2026-09-02`
 
-CHANGE-ID: `CHG-2026-09-01-C1-PROTOCOL-PROPOSAL`
+CHANGE-ID vigente: `CHG-2026-09-02-B1-CORRECTIVE-APPROVAL`
 
-Registro de aprovacao: `docs/reviews/C1_PROTOCOL_APPROVAL_2026-09-01.md`
+Registro vigente: `docs/reviews/B1_CORRECTIVE_APPROVAL_2026-09-02.md`
 
-Este documento e uma proposta de protocolo para C1. Nao e um freeze e nao autoriza conjunto selado. A tarefa deve ser aprovada pelo conselho cientifico antes da implementacao definitiva.
+Este documento define a estrutura aprovada de construto para C1. Nao e um freeze e nao autoriza conjunto selado. Parametros quantitativos exigem preregistro separado antes da implementacao confirmatoria.
 
 ## Pergunta
 

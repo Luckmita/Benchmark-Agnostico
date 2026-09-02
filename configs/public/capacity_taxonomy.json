@@ -1,6 +1,6 @@
 {
-  "status": "CORRECTIVE_DRAFT_PUBLIC",
-  "change_id": "CHG-2026-09-01-GATE-REALIGNMENT",
+  "status": "B1_APPROVED_PUBLIC_TAXONOMY",
+  "change_id": "CHG-2026-09-02-B1-CORRECTIVE-APPROVAL",
   "capacities": [
     {"id": "C1", "name": "learning"},
     {"id": "C2", "name": "sample_efficiency"},

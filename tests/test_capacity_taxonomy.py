@@ -13,7 +13,7 @@ class CapacityTaxonomyTests(unittest.TestCase):
         config = json.loads(path.read_text(encoding="utf-8"))
         configured = {item["id"]: item["name"] for item in config["capacities"]}
         self.assertEqual(configured, PUBLIC_CAPACITY_NAMES)
-        self.assertEqual(config["status"], "CORRECTIVE_DRAFT_PUBLIC")
+        self.assertEqual(config["status"], "B1_APPROVED_PUBLIC_TAXONOMY")
 
 
 if __name__ == "__main__":
