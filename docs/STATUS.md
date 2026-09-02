@@ -51,13 +51,15 @@ Resultado: `BLOCKED`.
 
 A matriz detalhada esta em `docs/reviews/GATE_AUDIT_2026-09-01.md`.
 
-## Trabalho corretivo em andamento
+## Marco corretivo concluido em 2026-09-02
 
-1. Corrigir status, decisoes e taxonomia canonica.
+1. Status, decisoes, historico e taxonomia canonica corrigidos.
 2. Instalacao editavel, testes e run publico rastreavel implementados.
-3. Revisar os contratos e evidencias B2/B3 sem alegar fechamento prematuro.
-4. Taxonomia e prototipos publicos C1-C11 realinhados; falta aprovacao cientifica e validacao da vertical C1.
-5. Registrar bloqueios externos de B12, B13 e B15 sem simular sua conclusao.
+3. Contratos e evidencias B2/B3 melhorados sem alegar fechamento prematuro.
+4. Prototipos publicos C1-C11 realinhados; scripts de falso freeze/`PASS` desativados.
+5. Bloqueios externos de B12, B13 e B15 registrados sem simular sua conclusao.
+
+Revisao: `docs/reviews/CORRECTIVE_MILESTONE_REVIEW_2026-09-02.md`.
 
 ## Proximo passo executavel
 
@@ -69,4 +71,5 @@ Concluir o realinhamento da matriz e dos protocolos C1-C11; depois submeter B1 a
 - Objetivo: revisao corretiva de gates e reproducibilidade
 - Plano: `docs/CORRECTIVE_REVIEW_PLAN.md`
 - Comandos-base: `python -m pytest -q`; `python scripts/skill_validator.py`; validacoes focadas registradas nos commits
+- Validacao limpa: `45 passed, 3 skipped`; governance e skill validator passaram; run publico C1 rastreavel passou
 - Riscos: aprovacao cientifica, infraestrutura sealed, red team separado e replicacao independente exigem autoridade/evidencia externa

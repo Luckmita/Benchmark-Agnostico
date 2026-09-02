@@ -142,3 +142,17 @@ Esta rodada termina quando:
 - a branch e seus commits foram enviados ao remoto.
 
 Fechar todos os gates ate B15 nao pode ser automatizado apenas por alteracoes neste repositorio: B12 requer auditoria adversarial separada, B13 requer infraestrutura de acesso restrito e B15 requer terceiro independente. Esses itens permanecerao explicitamente bloqueados ate existir evidencia externa valida.
+
+## Resultado da execucao - 2026-09-02
+
+Estado: `CORRECTIVE ENGINEERING MILESTONE COMPLETE; B1 BLOCKED`.
+
+- R0 concluido: status, decisoes, historico e matriz de gates realinhados.
+- R1 concluido como proposta: taxonomia canonica, protocolos corretivos e prototipos publicos consistentes; aprovacao cientifica continua externa.
+- R2 concluido no escopo local: instalacao editavel, manifest/schema, hashes, tempos, CLI e artefatos por `run_id`; lock/container e executor separado continuam pendentes.
+- R3 nao e declarado concluido como gate: controles e prototipos existem, mas a vertical C1 confirmatoria depende de preregistro aprovado.
+- R4 e R5 permanecem bloqueados por revisao/red team separados, storage restrito e terceiro independente.
+
+Validacao em ambiente virtual limpo: `45 passed, 3 skipped`; `scripts/check_governance.py` e `scripts/skill_validator.py` passaram; run publico C1 retornou `PASS` e gerou registry rastreavel.
+
+Relatorio de fechamento: `docs/reviews/CORRECTIVE_MILESTONE_REVIEW_2026-09-02.md`.

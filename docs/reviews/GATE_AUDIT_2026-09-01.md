@@ -15,8 +15,8 @@ Um gate recebe `PASS` somente quando cada criterio de saida possui evidencia rep
 | --- | --- | --- | --- | --- |
 | B0 | governanca e regras aprovadas | charter, decisoes e revisao B0/B1 | PASS historico | completar papeis nominais, licenca e mecanismo externo sem reabrir a regra central |
 | B1 | capacidades operacionalmente definidas | matriz inicial e protocolos exploratorios | BLOCKED | eliminar `PENDENTE`, alinhar C1-C11 e obter revisao cientifica |
-| B2 | contrato universal neutro funcionando | protocolo Python, manifest inicial e testes | PARTIAL | completar contrato/schema e conformidade ponta a ponta |
-| B3 | registry, rastreabilidade e reproducao | runner, registry, artifact store e testes | PARTIAL | instalacao reproduzivel, CLI de run, hashes/tempos e cadeia por `run_id` |
+| B2 | contrato universal neutro funcionando | protocolo Python; manifest/schema alinhados; timeout, capabilities, hashes e testes de contrato | READY FOR REVIEW, sem avanco linear | aprovacao de B1 e revisao humana do contrato universal |
+| B3 | registry, rastreabilidade e reproducao | instalacao limpa; runner isolado; CLI; registry; raw/metrics/logs/manifests; hashes e tempos por `run_id` | READY FOR REVIEW, sem avanco linear | lock/container por digest e reproducao por executor separado |
 | B4 | controles implementados e validados | Random e EpsilonGreedy em bandit | BLOCKED | controles positivos/negativos pertinentes por construto |
 | B5 | aprendizagem e generalizacao | C1 exploratoria; generalizacao nao demonstrada | BLOCKED | vertical C1 valida e C3 TRAIN/ID/OOD/transfer |
 | B6 | dependencia temporal e planejamento | nenhum teste normativo | BLOCKED | tarefas que exijam retencao e consequencias atrasadas |
@@ -40,6 +40,15 @@ Um gate recebe `PASS` somente quando cada criterio de saida possui evidencia rep
 5. C10 mediu retorno em quatro acoes, nao calibracao de incerteza; a eficiencia computacional normativa e C11.
 6. Os JSONs agregados nao incluem `run_id`, hashes, hardware/software, raw por seed, logs ou manifests.
 7. Nao ha evidencia de auditoria independente, conjunto selado separado ou replicacao por terceiro.
+
+## Evidencia corretiva adicionada em 2026-09-02
+
+- `configs/public/capacity_taxonomy.json` e `tests/test_capacity_taxonomy.py` impedem nova troca silenciosa de IDs.
+- `scripts/check_governance.py` verifica status B1, barreira B16, protocolos canonicos e marcacao do historico superado.
+- `src/benchmark_core/tasks/c_batteries.py` contem apenas prototipos publicos coerentes com C2-C9; C10 esta em `metrics.py` e C11 em `resources.py`.
+- Scripts historicos de freeze e validacao generica retornam erro e nao sobrescrevem resultados.
+- `python -m benchmark_core.cli run-public-c1` produziu, em ambiente virtual limpo, registry com `run_id`, hash do codigo/config, timestamps, hardware/software e os cinco grupos de artefatos.
+- Suite em ambiente virtual limpo: `45 passed, 3 skipped`; skips limitados a symlinks indisponiveis no Windows usado.
 
 ## Decisao
 
