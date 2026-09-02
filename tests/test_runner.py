@@ -92,9 +92,9 @@ class RunnerTests(unittest.TestCase):
                 scenario="scenario",
                 seed=1,
                 submission="fast",
-                model_hash="model",
-                adapter_hash="adapter",
-                config_hash="config",
+                model_hash="not-applicable",
+                adapter_hash="not-applicable",
+                config_hash="a" * 64,
                 hardware="cpu",
                 software="python",
                 status="PASS",
@@ -106,15 +106,35 @@ class RunnerTests(unittest.TestCase):
                 scenario="scenario",
                 seed=2,
                 submission="fast",
-                model_hash="model",
-                adapter_hash="adapter",
-                config_hash="config",
+                model_hash="not-applicable",
+                adapter_hash="not-applicable",
+                config_hash="b" * 64,
                 hardware="cpu",
                 software="python",
                 status="TIMEOUT",
             ))
             self.assertEqual(len(path.read_text(encoding="utf-8").splitlines()), 2)
             self.assertTrue(path.parent.exists())
+
+            with self.assertRaisesRegex(ValueError, "duplicate run_id"):
+                registry.append(RunRecord.create(
+                    run_id="run-2",
+                    benchmark_version="0.1",
+                    environment="test",
+                    scenario="scenario",
+                    seed=2,
+                    submission="fast",
+                    model_hash="not-applicable",
+                    adapter_hash="not-applicable",
+                    config_hash="b" * 64,
+                    hardware="cpu",
+                    software="python",
+                    status="PASS",
+                ))
+
+    def test_hash_json_rejects_non_finite_values(self) -> None:
+        with self.assertRaises(ValueError):
+            hash_json({"value": float("nan")})
 
     def test_hash_paths_includes_relative_names_and_contents(self) -> None:
         with TemporaryDirectory() as directory:

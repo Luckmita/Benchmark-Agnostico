@@ -4,7 +4,7 @@
 
 | ID | Decisao | Motivo | Estado |
 | --- | --- | --- | --- |
-| D-001 | Python 3.12 para a infraestrutura inicial | ecossistema cientifico e facilidade de reproducao | provisoria |
+| D-001 | Python >=3.12,<3.15; ambiente B3 de referencia fixado em 3.14.7 | preserva compatibilidade inicial e registra a versao realmente reproduzida | adotada em 2026-09-02 |
 | D-002 | Resultado primario e vetor por capacidade | evita esconder fraquezas em score unico | alinhada ao plano |
 | D-003 | Separacao fisica entre core, submissions e sealed | reduz leakage e conflito de interesse | obrigatoria |
 | D-004 | Registry proprio com raw imutavel e hashes | rastreabilidade sem depender de servico externo | provisoria |
@@ -19,6 +19,7 @@
 | D-013 | Reservar B14 para release candidate, B15 para replicacao independente e B16 para submissao | restaura a semantica normativa dos gates e impede entrada prematura de candidatos | adotada em 2026-09-01 |
 | D-014 | Aprovar B1 corrigido como definicao de construtos e estrutura de protocolos C1-C11 | a aprovacao explicita do responsavel aceita a taxonomia, hipoteses, controles, metricas e criterios de invalidacao; parametros quantitativos continuam sujeitos a preregistro | adotada em 2026-09-02 |
 | D-015 | Versionar o contrato universal v0.1 com capabilities estritas e `AgentDecision` para incerteza | elimina divergencia entre manifest/runtime e torna a capability C10 observavel sem exigir mecanismo interno | adotada em 2026-09-02 |
+| D-016 | Tornar `run_id` portavel e unico, raw imutavel e ambiente B3 versionado | fecha riscos de sobrescrita, corrida simples, JSON nao finito e ambiente ambiguo | adotada em 2026-09-02 |
 
 ## Pendencias que bloqueiam freeze
 
@@ -77,3 +78,13 @@ Toda alteracao relevante deve adicionar uma entrada com `CHANGE-ID`, motivacao, 
 - Risco de vies: baixo; o envelope e arquiteturalmente neutro e aceita qualquer mecanismo interno.
 - Resultado esperado: contrato black-box rejeita declaracoes inconsistentes antes do run e preserva confianca no raw.
 - Evidencia: `docs/contracts/UNIVERSAL_AGENT_API_V0.1.md` e `docs/reviews/B2_GATE_REVIEW_2026-09-02.md`.
+
+### CHG-2026-09-02-B3-REPRODUCIBLE-RUNS
+
+- Motivacao: a revisao B3 encontrou duplicacao possivel de `run_id`, writes nao atomicos, raw sobrescrevivel, JSON nao finito e perda de trajetoria parcial.
+- Impacto cientifico: melhora rastreabilidade e preservacao de evidencia; nao altera tarefas, rewards, seeds, budgets, metricas ou scoring.
+- Testes afetados: artifacts, registry, episode, run, CLI e instalacao limpa.
+- Compatibilidade: IDs portaveis continuam aceitos; IDs com caracteres dependentes de sistema passam a ser rejeitados. Raw nao aceita overwrite.
+- Risco de vies: nenhum esperado; a mudanca impede reescrita ou perda seletiva de evidencia.
+- Resultado esperado: cada `run_id` e reivindicado uma vez, cada arquivo novo usa criacao exclusiva e erros preservam passos concluidos.
+- Evidencia: `docs/ENVIRONMENT_B3.md` e futura revisao de gate B3.

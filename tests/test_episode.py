@@ -45,6 +45,13 @@ class SlowEnvironment(CounterEnvironment):
         return super().step(action)
 
 
+class InvalidAfterOneEnvironment(CounterEnvironment):
+    def step(self, action: int) -> tuple[int, float, bool, bool, dict[str, object]]:
+        if getattr(self, "steps", 0) >= 1:
+            raise ValueError("second action invalid")
+        return super().step(action)
+
+
 def reject_action(action: object) -> None:
     raise ValueError("invalid")
 
@@ -89,6 +96,21 @@ class EpisodeTests(unittest.TestCase):
             max_steps=3,
         )
         self.assertEqual(result.status, "TIMEOUT")
+
+    def test_invalid_action_preserves_completed_raw_steps(self) -> None:
+        result = run_episode(
+            StatefulAgent,
+            InvalidAfterOneEnvironment(),
+            AgentSpecification("observation", "action", 1),
+            AgentManifest("1", "partial", "1"),
+            max_steps=3,
+        )
+        self.assertEqual(result.status, "INVALID_ACTION")
+        self.assertEqual(result.steps, 1)
+        self.assertEqual(result.total_reward, 0.0)
+        self.assertEqual(len(result.action_results), 1)
+        self.assertEqual(result.action_results[0].observation, 0)
+        self.assertEqual(result.action_results[0].next_observation, 1)
 
 
 if __name__ == "__main__":

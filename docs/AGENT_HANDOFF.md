@@ -48,4 +48,4 @@ Se uma skill for criada ou alterada, registrar tambem gatilho, gate de origem, e
 
 ## Primeiro trabalho recomendado
 
-Revisar formalmente B3 contra registry, unicidade de `run_id`, raw imutavel, artefatos, hashes, ambiente reproduzivel e CLI. Nao tratar os experimentos historicos de 2026-09-01 como freeze.
+Construir a matriz B4 de controles negativos, positivos e baselines tecnicamente pertinentes por construto. Comecar pela vertical C1 e nao usar os experimentos historicos de 2026-09-01 como validacao confirmatoria.

@@ -17,7 +17,7 @@ from .metrics import (
 )
 from .artifacts import ArtifactStore
 from .protocol import AgentCapabilities, AgentDecision, AgentProtocolError, AgentSpecification, Transition, validate_agent
-from .registry import RunRecord, RunRegistry, hash_file, hash_json, hash_paths, hash_source_tree
+from .registry import RunRecord, RunRegistry, hash_file, hash_json, hash_paths, hash_source_tree, validate_run_id
 from .runner import RunResult, record_result, run_action
 from .run import execute_run
 from .resources import ResourceMeasurement, measure_callable
@@ -55,6 +55,7 @@ __all__ = [
     "summarize",
     "trapezoidal_auc",
     "validate_specification",
+    "validate_run_id",
     "win_rate",
     "validate_agent",
     "validate_contract",

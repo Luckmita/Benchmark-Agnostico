@@ -23,7 +23,7 @@ O benchmark deve ser construido, validado e congelado antes da entrada de qualqu
 
 ## Estado atual
 
-O charter B0, o construct framework B1 e o contrato universal B2 foram aprovados. B3 e o gate atual, em revisao da infraestrutura experimental. Existem componentes experimentais de B3 e tarefas publicas de desenvolvimento, mas nenhum gate B3-B15 esta atualmente aprovado como concluido.
+Os gates B0-B3 foram aprovados com evidencias versionadas. B4 e o gate atual, dedicado a controles e baselines tecnicamente pertinentes. Existem tarefas publicas de desenvolvimento, mas nenhum gate B4-B15 esta atualmente aprovado como concluido.
 
 Os registros de freeze de 2026-09-01 sao preservados como historico, porem nao autorizam conjunto selado, release candidate, replicacao ou submissao. O plano e a auditoria vigentes estao em [Plano de revisao corretiva](docs/CORRECTIVE_REVIEW_PLAN.md) e [Auditoria de gates](docs/reviews/GATE_AUDIT_2026-09-01.md).
 
@@ -39,13 +39,17 @@ Ao fechar cada gate, use `.github/skills/gate-review/SKILL.md` para verificar ev
 
 ## Ambiente de desenvolvimento
 
-Requer Python 3.12 ou superior. Em um ambiente virtual:
+O ambiente B3 de referencia usa a versao registrada em `.python-version` e os pins de `requirements-dev.lock`:
 
 ```powershell
-python -m pip install -e ".[dev]"
-python -m pytest -q
-python scripts/skill_validator.py
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements-dev.lock
+.\.venv\Scripts\python.exe -m pip install -e . --no-build-isolation --no-deps
+.\.venv\Scripts\python.exe -m pytest -q
+.\.venv\Scripts\python.exe scripts/skill_validator.py
 ```
+
+Detalhes e limites: [ambiente de referencia B3](docs/ENVIRONMENT_B3.md).
 
 Um run publico de desenvolvimento C1 pode ser produzido sem dados selados:
 

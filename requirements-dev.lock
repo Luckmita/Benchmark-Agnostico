@@ -1,0 +1,9 @@
+# B3 reference environment. Regenerate only with an engineering CHANGE-ID.
+setuptools==80.9.0
+wheel==0.45.1
+pytest==9.1.1
+pluggy==1.6.0
+packaging==26.3
+iniconfig==2.3.0
+Pygments==2.21.0
+colorama==0.4.6

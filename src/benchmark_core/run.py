@@ -34,6 +34,8 @@ def execute_run(
     """Execute, persist, and register one run; return its final status."""
 
     manifest.validate()
+    if registry.contains(run_id):
+        raise ValueError(f"duplicate run_id: {run_id}")
     manifest_data = manifest.to_dict()
     manifest_hash = hash_json(manifest_data)
     config_hash = hash_json(config)
@@ -65,6 +67,10 @@ def execute_run(
                     "action": item.action,
                     "reward": item.reward,
                     "confidence": item.confidence,
+                    "observation": item.observation,
+                    "next_observation": item.next_observation,
+                    "terminated": item.terminated,
+                    "truncated": item.truncated,
                     "action_elapsed_seconds": item.elapsed_seconds,
                 }
                 for index, item in enumerate(result.action_results, start=1)

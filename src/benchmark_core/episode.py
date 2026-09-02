@@ -73,12 +73,12 @@ def _episode_worker(
     action_validator: Callable[[Any], None] | None,
     result_queue: mp.Queue[Any],
 ) -> None:
+    total_reward = 0.0
+    action_results: list[RunResult] = []
     try:
         agent = factory()
         validate_agent(agent, specification)
         observation = environment.reset(specification.seed)
-        total_reward = 0.0
-        action_results: list[RunResult] = []
         for step in range(max_steps):
             agent.observe(observation)
             action_start = time.monotonic()
@@ -98,6 +98,10 @@ def _episode_worker(
                     action=action,
                     reward=reward,
                     confidence=decision.confidence,
+                    observation=observation,
+                    next_observation=next_observation,
+                    terminated=bool(terminated),
+                    truncated=bool(truncated),
                     elapsed_seconds=action_elapsed,
                 )
             )
@@ -109,6 +113,16 @@ def _episode_worker(
                 return
         result_queue.put(EpisodeResult("MAX_STEPS", total_reward, max_steps, tuple(action_results)))
     except ValueError as error:
-        result_queue.put(EpisodeResult("INVALID_ACTION", 0.0, 0, (), str(error)))
+        result_queue.put(
+            EpisodeResult("INVALID_ACTION", total_reward, len(action_results), tuple(action_results), str(error))
+        )
     except Exception as error:  # worker boundary must serialize failures
-        result_queue.put(EpisodeResult("ERROR", 0.0, 0, (), f"{type(error).__name__}: {error}"))
+        result_queue.put(
+            EpisodeResult(
+                "ERROR",
+                total_reward,
+                len(action_results),
+                tuple(action_results),
+                f"{type(error).__name__}: {error}",
+            )
+        )

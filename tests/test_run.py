@@ -70,6 +70,27 @@ class RunTests(unittest.TestCase):
             self.assertTrue((root / "artifacts" / "run-1" / "logs" / "execution.json").exists())
             self.assertEqual(len(registry_path.read_text(encoding="utf-8").splitlines()), 1)
 
+    def test_execute_run_rejects_duplicate_id_before_new_artifacts(self) -> None:
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            registry = RunRegistry(root / "registry.jsonl")
+            common = {
+                "factory": OneStepAgent,
+                "environment": OneStepEnvironment(),
+                "specification": AgentSpecification("observation", "action", 11),
+                "manifest": AgentManifest("1", "baseline", "1"),
+                "run_id": "duplicate-run",
+                "benchmark_version": "0.1",
+                "scenario": "one-step",
+                "registry": registry,
+                "config": {"max_steps": 1},
+                "max_steps": 1,
+            }
+            execute_run(artifact_root=root / "first", **common)
+            with self.assertRaisesRegex(ValueError, "duplicate run_id"):
+                execute_run(artifact_root=root / "second", **common)
+            self.assertFalse((root / "second" / "duplicate-run").exists())
+
 
 if __name__ == "__main__":
     unittest.main()

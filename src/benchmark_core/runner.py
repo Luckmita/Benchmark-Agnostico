@@ -18,6 +18,10 @@ class RunResult:
     action: Any = None
     reward: float | None = None
     confidence: float | None = None
+    observation: Any = None
+    next_observation: Any = None
+    terminated: bool = False
+    truncated: bool = False
     elapsed_seconds: float = 0.0
     error: str = ""
 

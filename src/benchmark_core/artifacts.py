@@ -6,6 +6,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+from .registry import validate_run_id
+
 ARTIFACT_GROUPS = ("raw", "derived", "logs", "metrics", "manifest")
 
 
@@ -13,8 +15,7 @@ class ArtifactStore:
     """Keep raw and derived artifacts in separate run-scoped directories."""
 
     def __init__(self, root: Path, run_id: str) -> None:
-        if not run_id or "/" in run_id or "\\" in run_id or run_id in {".", ".."}:
-            raise ValueError("run_id must be a non-empty path-safe identifier")
+        validate_run_id(run_id)
         if root.is_symlink():
             raise ValueError("artifact root cannot be a symlink")
         self.root = root / run_id
@@ -36,10 +37,11 @@ class ArtifactStore:
         path = (self.root / group / name).with_suffix(".json")
         if path.parent.resolve() != (self.root / group).resolve() or path.is_symlink():
             raise ValueError("artifact path must remain inside its group")
-        if path.exists() and not overwrite:
-            raise FileExistsError(path)
-        path.write_text(
-            json.dumps(value, sort_keys=True, indent=2, ensure_ascii=True) + "\n",
-            encoding="utf-8",
-        )
+        if overwrite and group == "raw":
+            raise ValueError("raw artifacts are immutable")
+        payload = json.dumps(value, sort_keys=True, indent=2, ensure_ascii=True, allow_nan=False) + "\n"
+        mode = "w" if overwrite else "x"
+        with path.open(mode, encoding="utf-8", newline="\n") as stream:
+            stream.write(payload)
+            stream.flush()
         return path

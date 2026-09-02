@@ -15,6 +15,8 @@ class ArtifactTests(unittest.TestCase):
             self.assertEqual(path.read_text(encoding="utf-8"), '{\n  "value": 1\n}\n')
             with self.assertRaises(FileExistsError):
                 store.write_json("raw", "observations", {"value": 2})
+            with self.assertRaisesRegex(ValueError, "immutable"):
+                store.write_json("raw", "observations", {"value": 2}, overwrite=True)
             for group in ("raw", "derived", "logs", "metrics", "manifest"):
                 self.assertTrue((Path(directory) / "run-1" / group).is_dir())
 
@@ -22,6 +24,14 @@ class ArtifactTests(unittest.TestCase):
         with TemporaryDirectory() as directory:
             with self.assertRaises(ValueError):
                 ArtifactStore(Path(directory), "../escape")
+            with self.assertRaises(ValueError):
+                ArtifactStore(Path(directory), "windows:invalid")
+
+    def test_non_finite_json_is_rejected(self) -> None:
+        with TemporaryDirectory() as directory:
+            store = ArtifactStore(Path(directory), "run-1")
+            with self.assertRaises(ValueError):
+                store.write_json("metrics", "invalid", {"value": float("nan")})
 
     def test_path_unsafe_artifact_name_is_rejected(self) -> None:
         with TemporaryDirectory() as directory:

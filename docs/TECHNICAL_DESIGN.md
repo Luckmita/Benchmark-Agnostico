@@ -41,6 +41,8 @@ O runner inicial esta em `src/benchmark_core/runner.py`: cada acao roda em proce
 
 `python -m benchmark_core.cli run-public-c1` oferece um run publico reproduzivel para verificar B2/B3 sem acessar sealed ou candidatos. O teste `tests/test_cli.py` confirma a criacao de registry e dos cinco grupos de artefatos.
 
+B3 usa IDs portaveis com claim atomico por registry, rejeita duplicatas, cria novos JSONs de forma exclusiva e proibe overwrite de raw. Registros validam status, timestamps, seed e hashes; JSON nao finito e rejeitado. Em falha de ambiente/acao, passos ja concluidos permanecem no resultado quando o processo consegue responder.
+
 A primeira tarefa publica de desenvolvimento C1 esta em `src/benchmark_core/tasks/c1_learning.py`. Ela e uma familia de bandits estacionarios configuraveis, com controles aleatorio e epsilon-greedy. A tarefa nao representa ainda o conjunto final selado e nao deve ser tratada como benchmark congelado.
 
 `src/benchmark_core/metrics.py` fornece resumo descritivo, IC95 aproximado, efeito pareado, win rate, AUC e passos ate limiar. `src/benchmark_core/evaluation.py` executa um agente por seeds explicitas e retorna a distribuicao completa, status por seed e resumo estatistico. Nenhum resultado derivado substitui os artefatos brutos de cada run.
